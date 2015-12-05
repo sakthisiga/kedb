@@ -8,7 +8,7 @@ var Event = function() {
         create_todo();
         update_todo();
         delete_todo();
-       
+        search_article();
        
     };
     
@@ -46,15 +46,31 @@ var Event = function() {
  	        var postData = $(this).serialize();
  	        
  	        $.post(url, postData, function(o){
- 	           if(o.result == 1) {
- 	               Display.show_data();
- 	           } 
- 	           else
- 	           {
- 	        	   Display.error(o.error);
- 	           }
- 	        },'json');
-	           
+ 	        	if(o.length == 0)
+ 	        		{
+ 	        			output= '<div class="alert alert-warning" role="alert">No Record Found..!!</div>';
+ 	        		}
+ 	        	else
+ 	        		{
+ 	        	var output = '';
+	 	       	output += '<table class="table table-bordered">';
+	 	       	output+= '<tr><th>Article ID</th>';
+	 	       	output+= '<th>Date</th>';
+	 	       	output+= '<th>Employee ID</th>';
+	 	       	output+= '<th>Employee Name</th>';
+	 	       	output+= '<th>State</th>';
+	 	       	output+= '<th>Tool</th>';
+	 	       	output+= '<th>Issue</th>';
+	 	       	output+= '<th>Action</th></tr>';
+	 	       		for(var i = 0; i < o.length; i++)
+	 	       			{
+	 	       				output += Template.article(o[i]);
+	 	       			}
+	 	       	output += '</table>';
+ 	        		}
+	 	       		$("#list_todo").html(output);
+ 	        		
+	 	       	},'json');   
    	 });
    };
     // ------------------------------------------------------------------------

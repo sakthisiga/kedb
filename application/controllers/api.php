@@ -191,14 +191,75 @@ class Api extends CI_Controller {
     }
     
     //-------------------------------------------------------------------------------------------
+    //Function : Output the search result of Articles
+    //-------------------------------------------------------------------------------------------
+    public function search_article()
+    {
+    	$this->_require_login();
+    	
+    	//$this->output->set_content_type('application_json');
+    	
+    	
+    	if($this->input->post('s_date') != NULL)
+    	{
+    		$date = date("Y-m-d", strtotime($this->input->post('s_date')));
+    		$this->db->where('date', $date);
+    	}
+    	
+    	if($this->input->post('s_emp_id') != NULL)
+    	{
+    		$this->db->where('user_id', $this->input->post('s_emp_id'));
+    	}
+    	
+    	if($this->input->post('s_emp_name') != NULL)
+    	{
+    		$this->db->where('emp_name', $this->input->post('s_emp_name'));
+    	}
+    	
+    	if($this->input->post('s_state') != NULL)
+    	{
+    		$this->db->where('state', $this->input->post('s_state'));
+    	}
+    	
+    	if($this->input->post('s_tool') != NULL)
+    	{
+    		$this->db->where('tool', $this->input->post('s_tool'));
+    	}
+    	
+    	if($this->input->post('s_issue') != NULL)
+    	{
+    		$this->db->where('issue', $this->input->post('s_issue'));
+    	}
+    	
+    	$query = $this->db->get('article_tb');
+    	
+    	
+    	
+    	if($query)
+    	{
+    		// Get fresh list to be posted to DOM
+    		$result = $query->result();
+    		//$this->output->set_output(json_encode($result));
+    		$this->output->set_output(json_encode($result));
+    		return false;
+    	}
+    	else
+    	{
+    		$this->output->set_output(json_encode(['result' => '0']));
+    	}
+    
+    }
+    
+    //-------------------------------------------------------------------------------------------
     //Function : Get the Todo Item
     //-------------------------------------------------------------------------------------------
     
-    public function get_todo($id = NULL)
+    public function get_todo()
     {
         $this->_require_login();
         
-        if($id != NULL)
+        
+        if (isset($_GET['options']))
         {
         	$this->db->where([
         			'todo_id' => $id,
@@ -231,74 +292,7 @@ class Api extends CI_Controller {
     	}
     }
     
-    //-------------------------------------------------------------------------------------------
-    //Function : Output the search result of Articles
-    //-------------------------------------------------------------------------------------------
-  	public function search_article()
-  	{
-  		
-  			$this->_require_login();
-  		
-  			$this->output->set_content_type('application_json');
-  		
-  			//Form Validation
-  			
-  			/*$this->form_validation->set_rules('s_date','Date','required');
-  			$this->form_validation->set_rules('s_emp_name','Employee Name','required');
-  			$this->form_validation->set_rules('s_state','State','required');
-  			$this->form_validation->set_rules('s_tool','Tool','required');
-  			$this->form_validation->set_rules('s_issue','Issue Type','required');
-  			
-  		
-  			if($this->form_validation->run() == false)
-  			{
-  				$this->output->set_output(json_encode([
-  						'result' => '0',
-  						'error' => $this->form_validation->error_array()
-  				]));
-  				return false;
-  			} */
-  				
-  			//Inserting data
-  			//$date = date("Y-m-d", strtotime($this->input->post('date')));
-  			
-  			if($this->input->post('s_date') != NULL)
-  			{
-  				$date = date("Y-m-d", strtotime($this->input->post('s_date')));
-  				$this->db->where('date', $date);	
-  			}
-  			if($this->input->post('s_emp_id') != NULL)
-  			{
-  				$this->db->where('user_id', $this->input->post('s_emp_id'));
-  			}
-  			$query = $this->db->get('article_tb');
-  			
-  			/*$this->db->insert('article_tb', [
-  			 
-  					'date' => $date,
-  					'user_id' => $this->session->userdata('user_id'),
-  					'emp_name' => $this->input->post('emp_name'),
-  					'state' => $this->input->post('state'),
-  					'tool' => $this->input->post('tool'),
-  					'issue' => $this->input->post('issue'),
-  					'description' => $this->input->post('description')
-  			]); */
-  		
-  			if($query)
-  			{
-  				// Get fresh list to be posted to DOM
-  				$result = $query->result();
-  				print_r($result);
-  				$this->output->set_output(json_encode($result));
-
-  				return false;
-  			}
-  			else
-  			{
-  				$this->output->set_output(json_encode(['result' => '0']));
-  			}
-  		
-  	}
+    
     public function update_todo()
     {
     	$this->_require_login();
