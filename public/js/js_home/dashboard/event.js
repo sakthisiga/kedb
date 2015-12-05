@@ -37,7 +37,26 @@ var Event = function() {
     	 });
     };
     
-   
+ // ------------------------------------------------------------------------
+    
+    var search_article = function() {
+   	 $("#search_article").submit(function(evt) {
+   		 evt.preventDefault();
+ 	        var url = $(this).attr('action');
+ 	        var postData = $(this).serialize();
+ 	        
+ 	        $.post(url, postData, function(o){
+ 	           if(o.result == 1) {
+ 	               Display.show_data();
+ 	           } 
+ 	           else
+ 	           {
+ 	        	   Display.error(o.error);
+ 	           }
+ 	        },'json');
+	           
+   	 });
+   };
     // ------------------------------------------------------------------------
     
     var update_todo = function() {

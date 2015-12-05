@@ -4,8 +4,8 @@
 <!--  TAB Headings Starts -->
 
          <ul class="nav nav-tabs">
-             <li class="active"><a href="#add" data-toggle="tab">Add an Article</a></li>
-             <li><a href="#view" data-toggle="tab">View an Article</a></li>
+             <li class="active"><a href="#add" data-toggle="tab">Add Article</a></li>
+             <li><a href="#view" data-toggle="tab">View Article</a></li>
          </ul>
          
          
@@ -103,7 +103,7 @@
 							</a>
 							<div class="collapse" id="collapseExample">
 							  <div class="well">
-							    	<form class="form-inline">
+							    	<form id="search_article" class="form-inline" method="post" action="<?=site_url('api/search_article')?>">
 									  <div class="form-group">
 									     <input type="text" class="input-small" id="s_date" name="s_date" placeholder="Date">
 									     <input type="text" class="input-small" id="s_emp_id" name="s_emp_id" placeholder="Employee ID">

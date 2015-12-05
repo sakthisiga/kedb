@@ -6,12 +6,14 @@ var Template = function() {
         console.log('Template Created');
     };
     
+    
     // ------------------------------------------------------------------------
     
     this.article= function(obj) {
+    	var date = new Date(obj.date);
         var output = '';
         output += '<tr><td>'+ obj.article_id +'</td>';
-        output += '<td>'+ obj.date +'</td>';
+        output += '<td>'+ formatDate(date) +'</td>';
         output += '<td>'+ obj.user_id +'</td>';
         output+= '<td>'+ obj.emp_name +'</td>';
         output += '<td>'+ obj.state +'</td>';
@@ -34,6 +36,28 @@ var Template = function() {
     
     // ------------------------------------------------------------------------
     
+    function formatDate(d)
+    {
+        var month = d.getMonth();
+        var day = d.getDate();
+        month = month + 1;
+
+        month = month + "";
+
+        if (month.length == 1)
+        {
+            month = "0" + month;
+        }
+
+        day = day + "";
+
+        if (day.length == 1)
+        {
+            day = "0" + day;
+        }
+
+        return month + '-' + day + '-' + d.getFullYear();
+    }
     this.__construct();
     
 };

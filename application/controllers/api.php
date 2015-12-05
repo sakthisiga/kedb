@@ -230,64 +230,75 @@ class Api extends CI_Controller {
     		   		
     	}
     }
-   /* 
-    //-------------------------------------------------------------------------------------------
-    //Function : Autocomplete for Employee Name
-    //-------------------------------------------------------------------------------------------
-    
-    public function get_emp_name(){
-    	$field = "emp_name";
-    	$this->load->model('kedb_model');
-    	if (isset($_GET['term'])){
-    		$q = strtolower($_GET['term']);
-    		$this->kedb_model->get_details($q, $field);
-    			
-    	}
-    }
     
     //-------------------------------------------------------------------------------------------
-    //Function : Autocomplete for State
+    //Function : Output the search result of Articles
     //-------------------------------------------------------------------------------------------
-    
-    public function get_state(){
-    	$field = "state";
-    	$this->load->model('kedb_model');
-    	if (isset($_GET['term'])){
-    		$q = strtolower($_GET['term']);
-    		$this->kedb_model->get_details($q, $field);
-    		 
-    	}
-    }
-    
-    //-------------------------------------------------------------------------------------------
-    //Function : Autocomplete for Tool
-    //-------------------------------------------------------------------------------------------
-    
-    public function get_tool(){
-    	$field = "tool";
-    	$this->load->model('kedb_model');
-    	if (isset($_GET['term'])){
-    		$q = strtolower($_GET['term']);
-    		$this->kedb_model->get_details($q, $field);
-    		 
-    	}
-    }
-    
-    
-    //-------------------------------------------------------------------------------------------
-    //Function : Autocomplete for Issue
-    //-------------------------------------------------------------------------------------------
-    
-    public function get_issue(){
-    	$field = "issue";
-    	$this->load->model('kedb_model');
-    	if (isset($_GET['term'])){
-    		$q = strtolower($_GET['term']);
-    		$this->kedb_model->get_details($q, $field);
-    		 
-    	}
-    }
-    */
+  	public function search_article()
+  	{
+  		
+  			$this->_require_login();
+  		
+  			$this->output->set_content_type('application_json');
+  		
+  			//Form Validation
+  			
+  			/*$this->form_validation->set_rules('s_date','Date','required');
+  			$this->form_validation->set_rules('s_emp_name','Employee Name','required');
+  			$this->form_validation->set_rules('s_state','State','required');
+  			$this->form_validation->set_rules('s_tool','Tool','required');
+  			$this->form_validation->set_rules('s_issue','Issue Type','required');
+  			
+  		
+  			if($this->form_validation->run() == false)
+  			{
+  				$this->output->set_output(json_encode([
+  						'result' => '0',
+  						'error' => $this->form_validation->error_array()
+  				]));
+  				return false;
+  			} */
+  				
+  			//Inserting data
+  			//$date = date("Y-m-d", strtotime($this->input->post('date')));
+  			
+  			if($this->input->post('s_date') != NULL)
+  			{
+  				$date = date("Y-m-d", strtotime($this->input->post('s_date')));
+  				$this->db->where('date', $date);	
+  			}
+  			if($this->input->post('s_emp_id') != NULL)
+  			{
+  				$this->db->where('user_id', $this->input->post('s_emp_id'));
+  			}
+  			$query = $this->db->get('article_tb');
+  			
+  			/*$this->db->insert('article_tb', [
+  			 
+  					'date' => $date,
+  					'user_id' => $this->session->userdata('user_id'),
+  					'emp_name' => $this->input->post('emp_name'),
+  					'state' => $this->input->post('state'),
+  					'tool' => $this->input->post('tool'),
+  					'issue' => $this->input->post('issue'),
+  					'description' => $this->input->post('description')
+  			]); */
+  		
+  			if($query)
+  			{
+  				// Get fresh list to be posted to DOM
+  				$result = $query->result();
+  				print_r($result);
+  				$this->output->set_output(json_encode($result));
+
+  				return false;
+  			}
+  			else
+  			{
+  				$this->output->set_output(json_encode(['result' => '0']));
+  			}
+  		
+  	}
     public function update_todo()
     {
     	$this->_require_login();
