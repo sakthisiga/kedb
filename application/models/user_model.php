@@ -22,9 +22,7 @@ class User_model extends CI_Model {
 	        	{
 	        		$data[] = $row;
 	        	}
-	        	
 	        	return $data;
 	    }
-	    
-            
+	       
 }

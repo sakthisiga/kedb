@@ -9,7 +9,7 @@ var Template = function() {
     
     // ------------------------------------------------------------------------
     
-    this.article= function(obj) {
+    this.keynote= function(obj) {
     	var date = new Date(obj.date);
         var output = '';
         output += '<tr><td>'+ obj.article_id +'</td>';

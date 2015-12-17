@@ -8,13 +8,16 @@ var Dashboard = function() {
         Template    = new Template();
         load_article();
        // Display     = new Display();
+        $("#error").hide();
+        $("#success").hide();
+        $("#warning").hide();
         
     };
     
     // ------------------------------------------------------------------------
     
     var load_article = function() {
-       Display.show_data();
+    	Display.show_data(o.data);
     };
     
     // ------------------------------------------------------------------------

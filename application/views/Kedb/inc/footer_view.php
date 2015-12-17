@@ -1,18 +1,16 @@
-</div>
-<!-- End: Wrapper -->
-<footer>
-	<div class="navbar navbar-default navbar-fixed-bottom">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-         
-          &copy; <?=date('Y')?>, Xerox SCM team initiave for reusable KEDB articles
-         
-         
-        </div>
-      </div>
-    </div>
-</footer>
 
-</div>
+<footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 2.1.0
+        </div>
+        <strong>Copyright &copy; 2015-2016, Xerox Devops Initiative</a>.</strong> All rights reserved.
+      </footer>
+
+     
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+    </div><!-- ./wrapper -->
+
 </body>
 </html>

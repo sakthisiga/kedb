@@ -6,12 +6,12 @@ class Api extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model('kedb_model');
+        $this->gallery_path_url = realpath(APPPATH . '../public/img/profile');
     }
     
-    //-------------------------------------------------------------------------------------------
-    //Function : Check User login status
-    //-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+// Function : Check User login status
+//-------------------------------------------------------------------------------------------
     
     private function _require_login()
     {
@@ -22,9 +22,9 @@ class Api extends CI_Controller {
         }
     }
     
-    //-------------------------------------------------------------------------------------------
-    //Function : Login into application
-    //-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+//Function : Login into application
+//-------------------------------------------------------------------------------------------
     
      public function login()
     {
@@ -68,7 +68,7 @@ class Api extends CI_Controller {
         }
         else 
         {
-            $this->output->set_output(json_encode(['result' => '0', 'error2' => 'Invalid Credentials. <br> If you do not have user account, please click "Register" link to create a one ']));
+            $this->output->set_output(json_encode(['result' => '0', 'error2' => 'Invalid Credentials. <br> If you do not have user account, please click "Register a new membership" link to create a one ']));
         }
         
         
@@ -76,9 +76,9 @@ class Api extends CI_Controller {
         //print_r($session);
     }
     
-    //-------------------------------------------------------------------------------------------
-    //Function : New User Registration
-    //-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+// Function : New User Registration
+//-------------------------------------------------------------------------------------------
     
      public function register()
     {
@@ -133,223 +133,324 @@ class Api extends CI_Controller {
         //print_r($session);
     }
     
-    //-------------------------------------------------------------------------------------------
-    //Function : Create a Todo Item
-    //-------------------------------------------------------------------------------------------
-    
-    public function create_article()
-    {
-        $this->_require_login();
-        
-        $this->output->set_content_type('application_json');
-        
-        //Form Validation
-        $this->form_validation->set_rules('date','Date','required');
-        $this->form_validation->set_rules('emp_name','Employee Name','required');
+//-------------------------------------------------------------------------------------------
+// Function : Reset the Password - From: Profile View
+//-------------------------------------------------------------------------------------------
+     public function reset_password()
+     {
+     	$this->output->set_content_type('application_json');
+     	
+     	$this->form_validation->set_rules('cpass','Current Password','required');
+     	$this->form_validation->set_rules('npass','Password','required|min_length[4]|max_length[20]|matches[rnpass]');
+     	$this->form_validation->set_rules('rnpass','Re-type Password','required|min_length[4]|max_length[20]');
+     	
+     	if($this->form_validation->run() == FALSE)
+     	{
+     		$this->output->set_output(json_encode(['result' => '0','error' => $this->form_validation->error_array()]));
+     		return false;
+     	}
+     	
+     	$cpass = $this->input->post('cpass');
+     	$npass = $this->input->post('npass');
+     	$rnpass = $this->input->post('rnpass');
+     	
+     	$pass = hash('sha256',$cpass.PASS);
+     	
+     	$check_pass = $this->kedb_model->validate_pass($pass);
+     	
+     	if($check_pass)
+     	{
+     		$rnpass = hash('sha256',$rnpass.PASS); 
+     		$this->db->where(['emp_id' => $this->session->userdata('user_id')]);
+    		$this->db->update('user',['password' => $rnpass]);
+    		$result = $this->db->affected_rows();
+    		if($result)
+    			{
+    				$this->output->set_output(json_encode([
+    						'result' => '1',
+    						'output' => 'Password Updated Succesfully'
+    				]));
+    				return false;
+    			}
+    			else
+    			{
+    				$this->output->set_output(json_encode([
+    						'result' => '2',
+    						'output' => 'Do not try using current password'
+    				]));
+    				return false;
+    			}
+     	}
+     	else
+     	{
+     		$this->output->set_output(json_encode([
+     				'result' => '3',
+     				'output' => 'The current password you entered is not correct'
+     		]));
+     		return false;
+     	}
+     }
+
+//-------------------------------------------------------------------------------------------
+// Function : Reset the Profile - From: Profile View
+//-------------------------------------------------------------------------------------------
+     
+     public function reset_profile()
+     {
+     	$this->output->set_content_type('application_json');
+     
+     	$this->form_validation->set_rules('name','Employee Name','required');
+        $this->form_validation->set_rules('email','Email','required|valid_email');
         $this->form_validation->set_rules('state','State','required');
-        $this->form_validation->set_rules('tool','Tool','required');
-        $this->form_validation->set_rules('issue','Issue Type','required|min_length[10]|max_length[25]');
-        $this->form_validation->set_rules('description','Issue Description','required|min_length[25]|max_length[500]');
-        
-        if($this->form_validation->run() == false)
-        {
-        	$this->output->set_output(json_encode([
-        			'result' => '0',
-        			'error' => $this->form_validation->error_array()
-        	]));
-        	return false;
-        }
-        
-        //Inserting data
-        $date = date("Y-m-d", strtotime($this->input->post('date')));
-        $result = $this->db->insert('article_tb', [
-        		'date' => $date,
-        		'user_id' => $this->session->userdata('user_id'),
-        		'emp_name' => $this->input->post('emp_name'),
-        		'state' => $this->input->post('state'),
-        		'tool' => $this->input->post('tool'),
-        		'issue' => $this->input->post('issue'),
-        		'description' => $this->input->post('description')
-        ]);
-        
-        if($result)
-        {
-        	// Get fresh list to be posted to DOM
-        	
-        	$query = $this->db->get_where('article_tb',['article_id' => $this->db->insert_id()]);
-        	$this->output->set_output(json_encode([
-        			'result' => '1',
-        			'output' => 'A new article has been added',
-        			'data' => $query->result()
-        	]));
-        	return false;
-        }
-        else
-        {
-        	$this->output->set_output(json_encode(['result' => '0']));
-        }
-    }
-    
-    //-------------------------------------------------------------------------------------------
-    //Function : Output the search result of Articles
-    //-------------------------------------------------------------------------------------------
-    public function search_article()
+     
+     	if($this->form_validation->run() == FALSE)
+     	{
+     		$this->output->set_output(json_encode(['result' => '0','error' => $this->form_validation->error_array()]));
+     		return false;
+     	}
+     
+     	$name = $this->input->post('name');
+     	$email = $this->input->post('email');
+     	$state = $this->input->post('state');
+
+     		
+     		$this->db->where(['emp_id' => $this->session->userdata('user_id')]);
+     		$this->db->update('user',[
+     				'emp_name' => $name,
+     				'email' => $email,
+     				'state' => $state
+     		]);
+     		$result = $this->db->affected_rows();
+     		if($result)
+     		{
+     			$this->output->set_output(json_encode([
+     					'result' => '1',
+     					'output' => 'Profile details have been updated Succesfully'
+     			]));
+     			return false;
+     		}
+     		else
+     		{
+     			$this->output->set_output(json_encode([
+     					'result' => '0',
+     					'error' => 'Problem in updating the profile details, you might have not updated anything..!!'
+     			]));
+     			return false;
+     		}
+     }
+     
+//-------------------------------------------------------------------------------------------
+// Function : Create a New Article in DB - From: KEDB Add View
+//-------------------------------------------------------------------------------------------     
+     
+     public function create_article()
+	    {
+	        $this->_require_login();
+	        
+	        $this->output->set_content_type('application_json');
+	        
+	        //Form Validation
+	        $this->form_validation->set_rules('date','Date','required');
+	        $this->form_validation->set_rules('emp_name','Employee Name','required');
+	        $this->form_validation->set_rules('state','State','required');
+	        $this->form_validation->set_rules('tool','Tool','required');
+	        $this->form_validation->set_rules('issue','Issue Type','required|min_length[10]|max_length[100]');
+	        $this->form_validation->set_rules('problem','Problem','required|min_length[20]|max_length[500]');
+	        $this->form_validation->set_rules('description','Issue Description','required|min_length[25]|max_length[1000]');
+	        
+	        if($this->form_validation->run() == false)
+	        {
+	        	$this->output->set_output(json_encode([
+	        			'result' => '0',
+	        			'error' => $this->form_validation->error_array()
+	        	]));
+	        	return false;
+	        }
+	        
+	        //Inserting data
+	        $date = date("Y-m-d", strtotime($this->input->post('date')));
+	        $result = $this->db->insert('article_tb', [
+	        		'date' => $date,
+	        		'user_id' => $this->session->userdata('user_id'),
+	        		'emp_name' => $this->input->post('emp_name'),
+	        		'state' => $this->input->post('state'),
+	        		'tool' => $this->input->post('tool'),
+	        		'issue' => $this->input->post('issue'),
+	        		'problem' => $this->input->post('problem'),
+	        		'description' => $this->input->post('description')
+	        ]);
+	        
+	        if($result)
+	        {
+	        	// Get fresh list to be posted to DOM
+	        	
+	        	$query = $this->db->get_where('article_tb',['article_id' => $this->db->insert_id()]);
+	        	$this->output->set_output(json_encode([
+	        			'result' => '1',
+	        			'output' => 'A new article has been added',
+	        			'data' => $query->result()
+	        	]));
+	        	return false;
+	        }
+	        else
+	        {
+	        	$this->output->set_output(json_encode(['result' => '0']));
+	        }
+	    }
+
+//-------------------------------------------------------------------------------------------
+// Function : Create a KeyNote in DB - From: Profile View
+//-------------------------------------------------------------------------------------------
+	     
+	 public function create_keynote()
+	    {
+	    	$this->_require_login();
+	    	 
+	    	$this->output->set_content_type('application_json');
+	    	 
+	    	//Form Validation
+	    	$this->form_validation->set_rules('kname','KeyNote Name','required');
+	    	$this->form_validation->set_rules('kusername','KeyNote Username','required');
+	    	$this->form_validation->set_rules('kpassword','KeyNote Password','required');
+	    	$this->form_validation->set_rules('kdescription','KeyNote Description','required');
+	    	
+	    	 
+	    	if($this->form_validation->run() == false)
+	    	{
+	    		$this->output->set_output(json_encode([
+	    				'result' => '0',
+	    				'error' => $this->form_validation->error_array()
+	    		]));
+	    		return false;
+	    	}
+	    	 
+	    	//Inserting data
+	    	$password = base64_encode($this->input->post('kpassword'));
+	    	$result = $this->db->insert('keynote_tb', [
+	    			'user_id' => $this->session->userdata('user_id'),
+	    			'key_name' => $this->input->post('kname'),
+	    			'key_username' => $this->input->post('kusername'),
+	    			'key_password' => $password,
+	    			'key_description' => $this->input->post('kdescription')
+	    	]);
+	    	 
+	    	if($result)
+	    	{
+	    		// Get fresh list to be posted to DOM
+	    
+	    		$query = $this->db->get_where('keynote_tb',['user_id' => $this->session->userdata('user_id')]);
+	    		$this->output->set_output(json_encode([
+	    				'result' => '1',
+	    				'output' => 'A new KeyNote has been added',
+	    				'data' => $query->result()
+	    		]));
+	    		return false;
+	    	}
+	    	else
+	    	{
+	    		$this->output->set_output(json_encode(['result' => '0']));
+	    	}
+	    }
+//-------------------------------------------------------------------------------------------
+// Function : Get the KeyNote Item
+//-------------------------------------------------------------------------------------------
+	    
+	    public function get_keynote()
+	    {
+	    	$this->_require_login();
+	    	$this->output->set_content_type('application_json');
+	    	$query = $this->db->get_where('keynote_tb',['user_id' => $this->session->userdata('user_id')]);
+	    	$this->output->set_output(json_encode($query->result()));
+	    
+	    }	    
+//-------------------------------------------------------------------------------------------
+// Function : Upload Profile Image
+//-------------------------------------------------------------------------------------------
+    public function do_upload()
     {
     	$this->_require_login();
-    	
-    	//$this->output->set_content_type('application_json');
-    	
-    	
-    	if($this->input->post('s_date') != NULL)
+    	$this->output->set_content_type('application_json');
+    	$config['upload_path'] = $this->gallery_path_url;
+    	$config['allowed_types'] = 'gif|jpg|png';
+    	$config['max_size']	= '10000';
+    	$config['max_width']  = '1024';
+    	$config['max_height']  = '768';
+    	$config['file_name'] = $this->session->userdata('user_id');
+    	$config['overwrite'] = TRUE;
+    
+    	$this->load->library('upload', $config);
+    
+    	if ( ! $this->upload->do_upload('userfile'))
     	{
-    		$date = date("Y-m-d", strtotime($this->input->post('s_date')));
-    		$this->db->where('date', $date);
-    	}
-    	
-    	if($this->input->post('s_emp_id') != NULL)
-    	{
-    		$this->db->where('user_id', $this->input->post('s_emp_id'));
-    	}
-    	
-    	if($this->input->post('s_emp_name') != NULL)
-    	{
-    		$this->db->where('emp_name', $this->input->post('s_emp_name'));
-    	}
-    	
-    	if($this->input->post('s_state') != NULL)
-    	{
-    		$this->db->where('state', $this->input->post('s_state'));
-    	}
-    	
-    	if($this->input->post('s_tool') != NULL)
-    	{
-    		$this->db->where('tool', $this->input->post('s_tool'));
-    	}
-    	
-    	if($this->input->post('s_issue') != NULL)
-    	{
-    		$this->db->where('issue', $this->input->post('s_issue'));
-    	}
-    	
-    	$query = $this->db->get('article_tb');
-    	
-    	
-    	
-    	if($query)
-    	{
-    		// Get fresh list to be posted to DOM
-    		$result = $query->result();
-    		//$this->output->set_output(json_encode($result));
-    		$this->output->set_output(json_encode($result));
-    		return false;
+    		$error = array('error' => $this->upload->display_errors());
+    		
+    		$this->load->view('kedb/inc/header_view');
+    		$this->load->view('kedb/profile_update_view',$error);
+    		$this->load->view('kedb/inc/footer_view');
     	}
     	else
     	{
-    		$this->output->set_output(json_encode(['result' => '0']));
-    	}
-    
-    }
-    
-    //-------------------------------------------------------------------------------------------
-    //Function : Get the Todo Item
-    //-------------------------------------------------------------------------------------------
-    
-    public function get_todo()
-    {
-        $this->_require_login();
-        
-        
-        if (isset($_GET['options']))
-        {
-        	$this->db->where([
-        			'todo_id' => $id,
-        			'user_id' => $this->session->userdata('user_id')
-        			
-        	]);
-        }
-        else
-        {
-        	$this->db->where('user_id',$this->session->userdata('user_id'));
-        }
-        
-        $query = $this->db->get('article_tb');
-        $result = $query->result();
-        
-        $this->output->set_output(json_encode($result));
-        
-    }
-    
-    //-------------------------------------------------------------------------------------------
-    //Function : Autocomplete for all the Search fields
-    //-------------------------------------------------------------------------------------------
-    
-    public function get_auto_details(){
-    	if (isset($_GET['term']))
-    	{
-    		$q = strtolower($_GET['term']);
-    		$this->kedb_model->get_details($q, $_GET['field']);
-    		   		
+    		//header(site_url('home/profile'));
+    		header("Refresh:0; url='../home/profile'");
     	}
     }
+
     
-    
-    public function update_todo()
+//-------------------------------------------------------------------------------------------
+// Function : Update Article in DB - From: KEDB Search View
+//-------------------------------------------------------------------------------------------
+  
+    public function update_article()
     {
     	$this->_require_login();
-    	$todo_id = $this->input->post('id');
-    	$completed = $this->input->post('completed');
+    	$this->output->set_content_type('application_json');
+    	
+    	$this->form_validation->set_rules('issue','Issue Type','required|min_length[10]|max_length[100]');
+    	$this->form_validation->set_rules('problem','Problem','required|min_length[20]|max_length[500]');
+    	$this->form_validation->set_rules('description','Issue Description','required|min_length[25]|max_length[1000]');
+    	
+    	if($this->form_validation->run() == false)
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '0',
+    				'error' => $this->form_validation->error_array()
+    		]));
+    		return false;
+    	}
+    	
+    	$article_id = $this->input->post('aid');
+    	$issue = $this->input->post('issue');
+    	$problem = $this->input->post('problem');
+    	$description = $this->input->post('description');
 
-    	$this->db->where(['todo_id' => $todo_id]);
-    	$this->db->update('todo',[
-    			'completed' => $completed
+    	$this->db->where(['article_id' => $article_id]);
+    	$this->db->update('article_tb',[
+    			'issue' => $issue,
+    			'problem' => $problem,
+    			'description' => $description
     	]);
     	
     	$result = $this->db->affected_rows();
     	
     if($result)
     	{
-	    	$this->output->set_output(json_encode(['result' => '1']));
+	    	$this->output->set_output(json_encode([
+	    			'result' => '1',
+	    			'output' => 'Article Updated Succesfully'
+	    	]));
 	    	return false;
     	}
     	else
     	{
     		$this->output->set_output(json_encode([
-    				'result' => '0',
-    				'message' => 'Could not Updated'
+    				'result' => '2',
+    				'output' => 'Please update before saving changes'
     		]));
     		return false;
     	}
     	
     }
-    
-    //-------------------------------------------------------------------------------------------
-    //Function : Delete a Todo Item
-    //-------------------------------------------------------------------------------------------
-    
-    public function delete_todo()
-    {
-        $this->_require_login();
-        
-        $result = $this->db->delete('todo',[
-        		'todo_id' => $this->input->post('todo_id'),
-        		'user_id' => $this->session->userdata('user_id')
-        ]);
-        
-        if($result)
-        {
-        	$this->output->set_output(json_encode(['result' => '1']));
-        	return false;
-        }
-        else 
-        {
-        	$this->output->set_output(json_encode([
-        			'result' => '0',
-        			'message' => 'Could not delete'
-        			
-        	]));
-        }
-        
-    }
+
    
 }
 
