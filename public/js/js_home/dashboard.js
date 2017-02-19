@@ -8,6 +8,9 @@ var Dashboard = function() {
         Template    = new Template();
         load_article();
        // Display     = new Display();
+        $("#error").hide();
+        $("#success").hide();
+        $("#warning").hide();
         
     };
     

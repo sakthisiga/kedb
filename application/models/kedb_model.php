@@ -2,7 +2,40 @@
 
 class Kedb_model extends CI_Model {
     
-    
+	
+	public function validate_pass($pass)
+	{	$this->db->where('password',$pass);
+		$query = $this->db->get('user');
+		return $query->result();
+	}
+	
+	public function profile_details($id)
+	{
+		$this->db->where('emp_id',$id);
+		$query = $this->db->get('user');
+		return $query->result();
+	}
+	public function get_articles()
+	{
+		$query = $this->db->get('article_tb');
+		return $query->result();
+	}
+	
+	public function get_modal_articles($id)
+	{
+		$this->db->where('article_id',$id);
+		$query = $this->db->get('article_tb');
+		return $query->result();
+	}
+	
+	public function get_articles_count($id)
+	{
+		$this->db->where('user_id',$id);
+		$this->db->from('article_tb');
+		return $this->db->count_all_results();
+		//return $query;
+	}
+	
 	public function get_details($q, $field){
 		$this->db->select($field);
 		$this->db->like($field, $q);

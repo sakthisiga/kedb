@@ -8,25 +8,77 @@ var Event = function() {
         create_todo();
         update_todo();
         delete_todo();
-        search_article();
-       
+        reset_password();
+        reset_profile();
     };
     
+// ------------------------------------------------------------------------
     
+    var reset_password = function() {
+    	 $("#reset_password").submit(function(evt) {
+    		 evt.preventDefault();
+  
+  	        var url = $(this).attr('action');
+  	        var postData = $(this).serialize();
+  	        
+  	        $.post(url, postData, function(o){
+  	           if(o.result == 0) 
+	  	           {
+	  	               Display.error(o.error);
+	  	           } 
+  	           else if(o.result == 1)
+	  	           {
+	  	        	   	Display.success(o.output);
+	  	           }
+  	           else if(o.result == 2)
+	  	           {
+	  	        	 	Display.warning(o.output);
+	  	           }
+  	           else if(o.result == 3)
+  	        	   {
+  	        	   		Display.warning(o.output);
+  	        	   }
+  	        },'json');
+	           
+    	 });
+    };
     
+// ------------------------------------------------------------------------
+    
+    var reset_profile = function() {
+    	 $("#reset_profile").submit(function(evt) {
+    		 evt.preventDefault();
+  
+  	        var url = $(this).attr('action');
+  	        var postData = $(this).serialize();
+  	        
+  	        $.post(url, postData, function(o){
+  	           if(o.result == 0) 
+	  	           {
+	  	               Display.warning(o.error);
+	  	           } 
+  	           else if(o.result == 1)
+	  	           {
+	  	        	   	Display.success(o.output);
+	  	        	   	location.reload();
+	  	           }
+  	        },'json');
+	           
+    	 });
+    };
     
     // ------------------------------------------------------------------------
     
     var create_todo = function() {
     	 $("#create_article").submit(function(evt) {
     		 evt.preventDefault();
+  
   	        var url = $(this).attr('action');
   	        var postData = $(this).serialize();
   	        
   	        $.post(url, postData, function(o){
   	           if(o.result == 1) {
   	               Display.success(o.output);
-  	               Display.show_data();
   	           } 
   	           else
   	           {
@@ -75,47 +127,27 @@ var Event = function() {
    };
     // ------------------------------------------------------------------------
     
-    var update_todo = function() {
-    	
-    	$("body").on('click', '.todo_update', function(e) {
-    		e.preventDefault();
-    		
-    		var self = $(this);
-    		var url = $(this).attr('href');
-    		var postData = {
-    			id: $(this).attr('data-id'),
-    			completed: $(this).attr('data-completed')
-    		};
-    		
-    		console.log(postData);
-    		
-    		$.post(url,postData, function(o){
-    			if(o.result == 1)
-    				{
-    					
-    					if(postData.completed == 1)
-    						{
-		    					self.parent('div').addClass('todo_complete');
-		    					self.html('<i class="icon-share-alt"></i>');
-		    					self.attr('data-completed',0);
-		    					//Display.success('');
-    						}
-    					else
-    						{
-	    						self.parent('div').removeClass('todo_complete');
-		    					self.html('<i class="icon-ok"></i>');
-		    					self.attr('data-completed',1);
-		    					//Display.warning('');
-    						}
-    				}
-    			else
-    				{
-    					Display.error('Nothing Updated');
-    				}
-    		},'json');
-    		
-    	});
-        
+    var update_todo = function() {	
+    	 $("#update_article").submit(function(evt) {
+    		 evt.preventDefault();
+    		 
+  	        var url = $(this).attr('action');
+  	        var postData = $(this).serialize();
+  	        
+  	        $.post(url, postData, function(o){
+  	           if(o.result == 1) {
+  	               Display.success(o.output);
+  	           }
+  	           else if(o.result == 2)
+  	        	   {
+  	        	   	Display.warning(o.output);
+  	        	   }
+  	           else
+  	           {
+  	        	   Display.error(o.error);
+  	           }
+  	        },'json');	           
+    	 });
     };
 
    

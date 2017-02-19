@@ -1,86 +1,86 @@
-<div class="row-fluid">
+<body class="hold-transition register-page">  
 
-    <div class="span4 offset4">
-         <div id="register-form-error" class="alert alert-error"><!-- Dynamic field flows --> </div>
-    </div>
+
     
+      <div class="register-logo">
+        <a href="<?=base_url()?>login"><b>Xerox </b><small>| ECCRM</small></a>
+      </div>
+      
+<div class="col-md-3">
 </div>
 
-
-<div class="row-fluid">
-<div class="span12">
-   
-<form id="register-form" class="form-signin" method="post" action="<?=site_url('api/register')?>">
- <fieldset>
-    <legend>Register User</legend>
-    <div class="col-sm-12">
-    <div class="control-group">
-		<label class="control-label"> Employee ID</label>
-		<div class="controls">
-			<input type="text" name="emp_id" class="input-xlarge">
-		</div>	
-	</div>
-	</div>
-
-	 <div class="col-sm-12">
-	<div class="control-group">
-		<label class="control-label"> Employee Name</label>
-		<div class="controls">
-			<input type="text" name="emp_name" class="input-xlarge">
-		</div>	
-	</div>
-	</div>
-	
-	<div class="control-group">
-		<label class="control-label"> State</label>
-		<div class="controls">
-			<select name="state" class="form-control">
-					<option> </option>
+<div class="col-md-4">
+      <div class="register-box-body">
+        <p class="login-box-msg">Register a new membership</p>
+        <form id="register-form" class="form-signin" method="post" action="<?=site_url('api/register')?>">
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" name="emp_id" placeholder="Employee ID">
+            <span class="glyphicon glyphicon-king form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" name="emp_name" placeholder="Employee Name">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          
+          <div class="form-group has-feedback">
+            <select name="state" class="form-control" placeholder="State">
+					<option disabled selected> Select a State</option>
 				<?php foreach($states as $state) : ?>
 					<option> <?php echo $state->state_name; ?> </option>
 				<?php endforeach;?>
 			</select>
-			
-		</div>	
-	</div>
-	
-        <div class="control-group">
-		<label class="control-label"> Email</label>
-		<div class="controls">
-			<input type="text" name="email" class="input-xlarge">
-		</div>	
-	</div>
+          </div>
+          
+          <div class="form-group has-feedback">
+            <input type="email" class="form-control" name="email" placeholder="Email">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" name="password" placeholder="Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" name="confirm_password" placeholder="Retype password">
+            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+            </div><!-- /.col -->
+          </div>
+        </form>
+
+        <a href="<?=base_url()?>login" class="text-center">I already have a membership</a>
+      </div><!-- /.form-box -->
+      
+      
+</div><!-- /.register-box -->
+
+
+<div class="col-md-4">
+
+	         <div id="register-form-error"><!-- Dynamic field flows --> </div>
+
+</div>
+
+
+    <!-- jQuery 2.1.4 -->
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../plugins/iCheck/icheck.min.js"></script>
+    <script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '10%' // optional
+        });
+      });
+    </script>
     
-	<div class="control-group">
-		<label class="control-label"> Password</label>
-		<div class="controls">
-			<input type="password" name="password" class="input-xlarge">
-		</div>	
-	</div>
-	
-    <div class="control-group">
-		<label class="control-label"> Confirm Password</label>
-		<div class="controls">
-			<input type="password" name="confirm_password" class="input-xlarge">
-		</div>	
-	</div>
-	<div class="control-group">
-		<div class="controls">
-			<input type="submit" value="Register" class="btn btn-primary"> 
-                        <a class="btn btn-inverse" href="<?=site_url('/')?>">Back</a>
-		</div>	
-	</div>
- </fieldset>
-</form>
-
-</div>
-</div>
-
-
-
-
-
-<script type="text/javascript">
+    <script type="text/javascript">
 $(function(){
     
     $("#register-form-error").hide();
@@ -96,7 +96,8 @@ $(function(){
            else
            {
                $("#register-form-error").show();
-               var output = '<ul>';
+               var output = '<div  class="alert alert-error">';
+                   output += '<ul>';
                
                for (var key in o.error)
                {
@@ -104,12 +105,16 @@ $(function(){
                     output += '<li>' + value + '</li>';
                }
                output += '</ul>';
-               $("#register-form-error").html(output);
+               output += '</div>';
+               $("#register-form-error").html(output).fadeIn();
                
            }
-            
+           setTimeout( function(){
+        	   $("#register-form-error").fadeOut();
+       	},3000);
+              	
         },'json');
     });
 });
 </script>
-    
+    </body>

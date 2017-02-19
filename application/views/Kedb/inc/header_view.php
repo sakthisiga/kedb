@@ -1,51 +1,65 @@
-<!doctype html>
-<html lang="en">
-    
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Xerox :: KEDB Articles</title>
-	<!-- CSS Links -->
-		<!-- Bootstrap CSS links -->
-		<link href="<?=base_url()?>public/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="<?=base_url()?>public/css/bootstrap-theme.css" rel="stylesheet" />
-        <link href="<?=base_url()?>public/css/bootstrap.min.panel.css" rel="stylesheet" />
-        
-        <!-- Jquery CSS links -->
-        <link href="<?=base_url()?>public/css/jquery-ui.css" rel="stylesheet" />
-        
-         
-         <!-- Custom CSS links -->
-		<link href="<?=base_url()?>public/css/style.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Xerox | ECCRM :: <?php echo $title; ?></title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	
+	<!-- CSS Links -->
+			<link rel="stylesheet" href="<?=base_url()?>public/css/bootstrap.min.css">
+			<link rel="stylesheet" href="<?=base_url()?>public/css/font-awesome.min.css">
+			<link rel="stylesheet" href="<?=base_url()?>public/css/ionicons.min.css">
+			<link rel="stylesheet" href="<?=base_url()?>public/css/buttons.dataTables.min.css">
+			<link rel="stylesheet" href="<?=base_url()?>public/boot/datatables/dataTables.bootstrap.css">			
+    		<link rel="stylesheet" href="<?=base_url()?>public/boot/daterangepicker/daterangepicker-bs3.css">
+    		<link rel="stylesheet" href="<?=base_url()?>public/boot/iCheck/all.css">
+        	<link rel="stylesheet" href="<?=base_url()?>public/boot/timepicker/bootstrap-timepicker.min.css">
+    		<link rel="stylesheet" href="<?=base_url()?>public/boot/select2/select2.min.css">
+    		<link rel="stylesheet" href="<?=base_url()?>public/css/AdminLTE.min.css">
+    		<link rel="stylesheet" href="<?=base_url()?>public/css/_all-skins.min.css">  		
+    		<link rel="stylesheet" href="<?=base_url()?>public/css/jquery-jvectormap-1.2.2.css">
+        	<link rel="stylesheet" href="<?=base_url()?>public/boot/datepicker/datepicker3.css">
+        	<link rel="stylesheet" href="<?=base_url()?>public/boot/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+        	
+        	
+        	        	
 	<!-- JS Section -->	
-		
-        <!-- Jquery JS -->
-        <script src="<?=base_url()?>public/js/jquery.js"></script>
-		<script src="<?=base_url()?>public/js/jquery-ui.js"></script>
-
-		
-		
-		<!-- Bootstrap JS -->
-        <script src="<?=base_url()?>public/js/bootstrap.js"></script>
-        <script src="<?=base_url()?>public/js/bootstrap.min.js"></script>
-        <script src="<?=base_url()?>public/js/bootstrap-transition.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-alert.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-modal.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-dropdown.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-scrollspy.js"></script>  
-	    <script src="<?=base_url()?>public/js/bootstrap-tab.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-tooltip.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-popover.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-button.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-collapse.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-carousel.js"></script>
-	    <script src="<?=base_url()?>public/js/bootstrap-typeahead.js"></script>
-         
+        	<script src="<?=base_url()?>public/js/jQuery-2.1.4.min.js"></script>
+        	<script src="<?=base_url()?>public/js/bootstrap.min.js"></script>
+        	<script src="<?=base_url()?>public/boot/datatables/jquery.dataTables.min.js"></script>
+        	<script src="<?=base_url()?>public/boot/datatables/dataTables.buttons.min.js"></script>
+        	<script src="<?=base_url()?>public/boot/exportable/buttons.flash.min.js"></script>
+        	<script src="<?=base_url()?>public/boot/exportable/jszip.min.js"></script>
+			<script src="<?=base_url()?>public/boot/exportable/pdfmake.min.js"></script>
+			<script src="<?=base_url()?>public/boot/exportable/vfs_fonts.js"></script>
+			<script src="<?=base_url()?>public/boot/exportable/buttons.html5.min.js"></script>
+			<script src="<?=base_url()?>public/boot/exportable/buttons.print.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/datatables/dataTables.bootstrap.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+			<script src="<?=base_url()?>public/boot/select2/select2.full.min.js"></script>
+			<script src="<?=base_url()?>public/boot/input-mask/jquery.inputmask.js"></script>
+    		<script src="<?=base_url()?>public/boot/input-mask/jquery.inputmask.date.extensions.js"></script>
+    		<script src="<?=base_url()?>public/boot/input-mask/jquery.inputmask.extensions.js"></script>
+    		<script src="<?=base_url()?>public/js/moment.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/daterangepicker/daterangepicker.js"></script>
+    		<script src="<?=base_url()?>public/boot/datepicker/bootstrap-datepicker.js"></script>
+    		<script src="<?=base_url()?>public/boot/timepicker/bootstrap-timepicker.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/slimScroll/jquery.slimscroll.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/iCheck/icheck.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/fastclick/fastclick.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/ckeditor/ckeditor.js"></script>
+    		<script src="<?=base_url()?>public/boot/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/dist/js/app.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/dist/js/demo.js"></script>
+    		  
 		<!-- Custom JS -->
-        <script src="<?=base_url()?>public/js/js_home/dashboard/template.js"></script>
-        <script src="<?=base_url()?>public/js/js_home/dashboard/event.js"></script>
-     	<script src="<?=base_url()?>public/js/js_home/dashboard/display.js"></script>  
-        <script src="<?=base_url()?>public/js/js_home/dashboard.js"></script>
+	 	
+        	<script src="<?=base_url()?>public/js/js_home/dashboard/template.js"></script>
+        	<script src="<?=base_url()?>public/js/js_home/dashboard/event.js"></script>
+     		<script src="<?=base_url()?>public/js/js_home/dashboard/display.js"></script>  
+        	<script src="<?=base_url()?>public/js/js_home/dashboard.js"></script>
 	
 	<!-- FAVICON file -->
 		<link rel="shortcut icon" href="<?php echo base_url();?>public/ico/favicon.png">
@@ -58,41 +72,100 @@
             var dashboard = new Dashboard();
             });
 
-        </script>
-        
-        
-</head>
-<body>
-<header>
-
-<div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        </script> 
+        <style>
+        tfoot input {
+        width: 100%;
+        padding: 0.02em;
+    }
+        </style>    
+  </head>
+  <body class="hold-transition skin-blue fixed sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+	<header class="main-header">
+	<?php 
+			$filename = base_url().'public/img/profile/'.$this->session->userdata('user_id').'.jpg';
+			if (@getimagesize($filename)) {
+				$dp_image = $filename;
+			} else {
+				$dp_image = base_url().'public/img/profile/anonymous.jpg';
+			}
+	?>
+        <!-- Logo -->
+        <a href="<?=base_url()?>home" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>X</b>BS</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Xerox</b> - ECCRM</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="<?=base_url()?>home"><strong>XEROX</strong> | SCM KEDB</a>
-          <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link"><?php echo $this->session->userdata('user_id'); ?></a> | <a href="<?=base_url()?>home/logout" class="navbar-link">Logout</a>
+          </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->
+             
+              <!-- Notifications: style can be found in dropdown.less -->
               
-            </p>
-            <ul class="nav">
-             <!--  <li><a href="<?php echo base_url(); ?>home">KeDB</a></li>  -->
+              <!-- Tasks: style can be found in dropdown.less -->
+              
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="<?=$dp_image ?>" class="user-image" alt="User Image">
+                  <span class="hidden-xs"><?php echo $this->session->userdata('emp_name'); ?></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="<?=$dp_image ?>" class="img-circle" alt="User Image">
+                    <p>
+                      <?php echo $this->session->userdata('emp_name'); ?> - <?php echo $this->session->userdata('user_id'); ?>
+                      <small>Member since 2015</small>
+                    </p>
+                  </li>
+                  
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="<?=base_url()?>home/profile" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="<?=base_url()?>home/logout" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
             </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
- 
-  
-  
-  
-</header>
-    
-<div class="wrapper">
-<!-- Start: Wrapper -->
-
-
+          </div>
+         
+        </nav>
+      </header>  
+      
+       <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">KEDB NAVIGATION</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-globe"></i> <span>KEDB</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="<?=base_url()?>home/add_article"><i class="fa fa-circle-o"></i> Add Article</a></li>
+                <li><a href="<?=base_url()?>home/search_article"><i class="fa fa-circle-o"></i> View Article</a></li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>   
+ </div>
