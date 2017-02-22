@@ -3,7 +3,7 @@ var Dashboard = function() {
     // ------------------------------------------------------------------------
   
     this.__construct = function() {
-        console.log('Dashboard Created');
+        console.log('Dashboard has been Created');
         Event       = new Event();
         Template    = new Template();
         load_article();

@@ -3,7 +3,7 @@ var Template = function() {
     // ------------------------------------------------------------------------
   
     this.__construct = function() {
-        console.log('Template Created');
+        console.log('Template has been Created');
     };
     
     

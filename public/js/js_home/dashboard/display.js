@@ -3,7 +3,7 @@ var Display = function() {
     // ------------------------------------------------------------------------
   
     this.__construct = function() {
-        console.log('Result Created');
+        console.log('Result has been Created');
     };
     
     // ------------------------------------------------------------------------

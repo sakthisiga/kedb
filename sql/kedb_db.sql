@@ -5,14 +5,11 @@
 -- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
 
 -- Dumping database structure for eccrm_db
 CREATE DATABASE IF NOT EXISTS `eccrm_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `eccrm_db`;
+USE `kedb_db`;
 
 
 -- Dumping structure for table eccrm_db.article_tb

@@ -5,7 +5,7 @@
 # then Save File As ".htaccess"
 
 RewriteEngine On
-RewriteBase /kedb
+RewriteBase /nydevops
 
 RewriteCond %{REQUEST_URI} ^system.*
 RewriteRule ^(.*)$ /index.php?/$1 [L]

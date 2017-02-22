@@ -297,7 +297,129 @@ class Api extends CI_Controller {
 	        	$this->output->set_output(json_encode(['result' => '0']));
 	        }
 	    }
+// -------------------------------------------------------------------------------------------
+// Function : Create a build entry in DB - From: BUILD Add View 
+// -------------------------------------------------------------------------------------------
+	     
+	 public function add_build()
+	    {
+	    	$this->_require_login();
+	    	 
+	    	$this->output->set_content_type('application_json');
+	    	 
+	    	//Form Validation
+	    	$this->form_validation->set_rules('date','Date','required');
+	    	$this->form_validation->set_rules('name','Name','required');
+	    	$this->form_validation->set_rules('rel','Release','required');
+	    	$this->form_validation->set_rules('build','Build','required');
+	    	$this->form_validation->set_rules('from_date','From Date','required');
+	    	$this->form_validation->set_rules('to_date','To Date','required');
+	    	$this->form_validation->set_rules('status','Status','required');
+	    	$this->form_validation->set_rules('reason','Reason','required');
+	    	 
+	    	if($this->form_validation->run() == false)
+	    	{
+	    		$this->output->set_output(json_encode([
+	    				'result' => '0',
+	    				'error' => $this->form_validation->error_array()
+	    		]));
+	    		return false;
+	    	}
+	    	 
+	    	//Inserting data
+	    	$date = date("Y-m-d ", strtotime($this->input->post('date')));
+	    	$result = $this->db->insert('build_tb', [
+	    			'date' => $date,
+	    			'name' => $this->input->post('name'),
+	    			'user_id' => $this->session->userdata('user_id'),
+	    			'rel' => $this->input->post('rel'),
+	    			'build' => $this->input->post('build'),
+	    			'from_date' => $this->input->post('from_date'),
+	    			'to_date' => $this->input->post('to_date'),
+	    			'status' => $this->input->post('status'),
+	    			'reason' => $this->input->post('reason')
+	    	]);
+	    	 
+	    	if($result)
+	    	{
+	    		// Get fresh list to be posted to DOM
+	    
+	    		$query = $this->db->get_where('build_tb',['build_id' => $this->db->insert_id()]);
+	    		$this->output->set_output(json_encode([
+	    				'result' => '1',
+	    				'output' => 'Build details added successfully..!!',
+	    				'data' => $query->result()
+	    		]));
+	    		return false;
+	    	}
+	    	else
+	    	{
+	    		$this->output->set_output(json_encode(['result' => '0']));
+	    	}
+	    }
+	     
+	    
+// -------------------------------------------------------------------------------------------
+// Function : Create a SCM Support entry in DB - From: SCM Add View
+// -------------------------------------------------------------------------------------------
+	    
+	    public function add_scm_support()
+	    {
+	    	$this->_require_login();
+	    	 
+	    	$this->output->set_content_type('application_json');
+	    	 
+	    	//Form Validation
+	    	$this->form_validation->set_rules('date','Date','required');
+	    	$this->form_validation->set_rules('name','Name','required');
+	    	$this->form_validation->set_rules('activity','Activity','required');
+	    	$this->form_validation->set_rules('rel','Release','required');
+	    	$this->form_validation->set_rules('from_date','From Date','required');
+	    	$this->form_validation->set_rules('to_date','To Date','required');
+	    	$this->form_validation->set_rules('status','Status','required');
+	    	$this->form_validation->set_rules('comment','Comment','min_length[10]|max_length[300]');
 
+	    	if($this->form_validation->run() == false)
+	    	{
+	    		$this->output->set_output(json_encode([
+	    				'result' => '0',
+	    				'error' => $this->form_validation->error_array()
+	    		]));
+	    		return false;
+	    	}
+	    	 
+	    	//Inserting data
+	    	$date = date("Y-m-d ", strtotime($this->input->post('date')));
+	    	$result = $this->db->insert('scm_tb', [
+	    			'date' => $date,
+	    			'name' => $this->input->post('name'),
+	    			'user_id' => $this->session->userdata('user_id'),
+	    			'activity' => $this->input->post('activity'),
+	    			'rel' => $this->input->post('rel'),
+	    			'from_date' => $this->input->post('from_date'),
+	    			'to_date' => $this->input->post('to_date'),
+	    			'status' => $this->input->post('status'),
+	    			'comment' => $this->input->post('comment')
+	    	]);
+	    	 
+	    	if($result)
+	    	{
+	    		// Get fresh list to be posted to DOM
+	    	  
+	    		$query = $this->db->get_where('scm_tb',['scm_id' => $this->db->insert_id()]);
+	    		$this->output->set_output(json_encode([
+	    				'result' => '1',
+	    				'output' => 'SCM Support details added successfully..!!',
+	    				'data' => $query->result()
+	    		]));
+	    		return false;
+	    	}
+	    	else
+	    	{
+	    		$this->output->set_output(json_encode(['result' => '0']));
+	    	}
+	    }
+	    
 //-------------------------------------------------------------------------------------------
 // Function : Create a KeyNote in DB - From: Profile View
 //-------------------------------------------------------------------------------------------

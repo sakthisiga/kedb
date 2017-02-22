@@ -28,9 +28,9 @@ class Home extends CI_Controller {
 		public function add_article()
 		{
 			$data['title'] = "Add an Article";
-			$this->load->view('kedb/inc/header_view',$data);
+			$this->load->view('inc/header_view',$data);
 			$this->load->view('kedb/kedb_add_view');
-			$this->load->view('kedb/inc/footer_view');
+			$this->load->view('inc/footer_view');
 		}
 
 //-------------------------------------------------------------------------------------------
@@ -41,9 +41,9 @@ class Home extends CI_Controller {
 		{
 			$data['articles'] = $this->kedb_model->get_articles();
 			$data['title'] = "Articles";
-			$this->load->view('kedb/inc/header_view',$data);
+			$this->load->view('inc/header_view',$data);
 			$this->load->view('kedb/kedb_search_view',$data);
-			$this->load->view('kedb/inc/footer_view');
+			$this->load->view('inc/footer_view');
 		}
 
 //-------------------------------------------------------------------------------------------
@@ -57,9 +57,9 @@ class Home extends CI_Controller {
 			$data['states'] = $this->home_model->get();
 			$data['title'] = "User Profile";
 			$data['user_details'] = $this->kedb_model->profile_details($this->session->userdata('user_id'));
-			$this->load->view('kedb/inc/header_view',$data);
+			$this->load->view('inc/header_view',$data);
 			$this->load->view('kedb/profile_view',$data);
-			$this->load->view('kedb/inc/footer_view');
+			$this->load->view('inc/footer_view');
 		}
 //-------------------------------------------------------------------------------------------
 //Function : Logout from application (Loads login page)

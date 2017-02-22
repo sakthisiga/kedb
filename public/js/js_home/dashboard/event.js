@@ -3,13 +3,16 @@ var Event = function() {
     // ------------------------------------------------------------------------
   
     this.__construct = function() {
-        console.log('Event Created');
+        console.log('Event has been Created');
         Display = new Display();
         create_todo();
+        create_build();
+        create_scm();
         update_todo();
         delete_todo();
         reset_password();
         reset_profile();
+        
     };
     
 // ------------------------------------------------------------------------
@@ -73,6 +76,48 @@ var Event = function() {
     	 $("#create_article").submit(function(evt) {
     		 evt.preventDefault();
   
+  	        var url = $(this).attr('action');
+  	        var postData = $(this).serialize();
+  	        
+  	        $.post(url, postData, function(o){
+  	           if(o.result == 1) {
+  	               Display.success(o.output);
+  	           } 
+  	           else
+  	           {
+  	        	   Display.error(o.error);
+  	           }
+  	        },'json');
+	           
+    	 });
+    };
+    
+ // ------------------------------------------------------------------------
+    
+    var create_build = function() {
+    	 $("#add_build").submit(function(evt) {
+    		 evt.preventDefault();
+  	        var url = $(this).attr('action');
+  	        var postData = $(this).serialize();
+  	        
+  	        $.post(url, postData, function(o){
+  	           if(o.result == 1) {
+  	               Display.success(o.output);
+  	           } 
+  	           else
+  	           {
+  	        	   Display.error(o.error);
+  	           }
+  	        },'json');
+	           
+    	 });
+    };
+    
+// ------------------------------------------------------------------------
+    
+    var create_scm = function() {
+    	 $("#add_scm_support").submit(function(evt) {
+    		 evt.preventDefault();
   	        var url = $(this).attr('action');
   	        var postData = $(this).serialize();
   	        

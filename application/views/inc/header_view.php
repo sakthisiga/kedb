@@ -16,6 +16,7 @@
     		<link rel="stylesheet" href="<?=base_url()?>public/boot/daterangepicker/daterangepicker-bs3.css">
     		<link rel="stylesheet" href="<?=base_url()?>public/boot/iCheck/all.css">
         	<link rel="stylesheet" href="<?=base_url()?>public/boot/timepicker/bootstrap-timepicker.min.css">
+        	<link rel="stylesheet" href="<?=base_url()?>public/boot/datetimepicker/bootstrap-datetimepicker.min.css">
     		<link rel="stylesheet" href="<?=base_url()?>public/boot/select2/select2.min.css">
     		<link rel="stylesheet" href="<?=base_url()?>public/css/AdminLTE.min.css">
     		<link rel="stylesheet" href="<?=base_url()?>public/css/_all-skins.min.css">  		
@@ -46,6 +47,7 @@
     		<script src="<?=base_url()?>public/boot/daterangepicker/daterangepicker.js"></script>
     		<script src="<?=base_url()?>public/boot/datepicker/bootstrap-datepicker.js"></script>
     		<script src="<?=base_url()?>public/boot/timepicker/bootstrap-timepicker.min.js"></script>
+    		<script src="<?=base_url()?>public/boot/datetimepicker/bootstrap-datetimepicker.js"></script>
     		<script src="<?=base_url()?>public/boot/slimScroll/jquery.slimscroll.min.js"></script>
     		<script src="<?=base_url()?>public/boot/iCheck/icheck.min.js"></script>
     		<script src="<?=base_url()?>public/boot/fastclick/fastclick.min.js"></script>
@@ -157,14 +159,24 @@
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">KEDB NAVIGATION</li>
+            <li class="header">NAVIGATION</li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-globe"></i> <span>Build</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?=base_url()?>home/add_build"><i class="fa fa-circle-o"></i> Add Build</a></li>
-                <li><a href="<?=base_url()?>home/search_build"><i class="fa fa-circle-o"></i> View Build</a></li>
+                <li><a href="<?=base_url()?>build/add_build"><i class="fa fa-circle-o"></i> Add Build</a></li>
+                <li><a href="<?=base_url()?>build/upload_build"><i class="fa fa-circle-o"></i> Upload Build</a></li>
+                <li><a href="<?=base_url()?>build/search_build"><i class="fa fa-circle-o"></i> View Build</a></li>
+              </ul>
+            </li>
+             <li class="treeview">
+              <a href="#">
+                <i class="fa fa-globe"></i> <span>SCM Support</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="<?=base_url()?>scm/add_scm_support"><i class="fa fa-circle-o"></i> Add Details</a></li>
+                <li><a href="<?=base_url()?>scm/search_scm_support"><i class="fa fa-circle-o"></i> View Details</a></li>
               </ul>
             </li>
 			 <li class="treeview">

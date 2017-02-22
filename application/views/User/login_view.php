@@ -7,7 +7,7 @@
     </div>
     
       <div class="login-logo">
-        <a href="<?=base_url()?>login"><b>Xerox </b><small>| ECCRM</small></a>
+        <a href="<?=base_url()?>login"><b>NYDEVOPS </b><small>| iTracker</small></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -28,8 +28,8 @@
           </div>
         </form>
 
-        <a href="#">I forgot my password</a><br>
-        <a href="<?=site_url('login/register')?>" class="text-center">Register a new membership</a>
+     <!-- <a href="#">I forgot my password</a><br>
+        <a href="<?=site_url('login/register')?>" class="text-center">Register a new membership</a> -->   
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
