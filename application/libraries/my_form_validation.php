@@ -1,6 +1,6 @@
 <?php
 
-class MY_Form_validaton extends CI_Form_validation {
+class my_form_validaton extends CI_Form_validation {
     
     public function __construct($config = array()) {
         parent::__construct($config);

@@ -2,7 +2,7 @@
 
 // Api Class Begins
 
-class Api extends CI_Controller {
+class api extends CI_Controller {
     
     public function __construct() {
         parent::__construct();

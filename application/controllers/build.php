@@ -2,7 +2,7 @@
 
 // Home Class Begins
 
-class Build extends CI_Controller {
+class build extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();

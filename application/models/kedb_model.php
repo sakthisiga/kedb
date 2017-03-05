@@ -1,6 +1,6 @@
 <?php
 
-class Kedb_model extends CI_Model {
+class kedb_model extends CI_Model {
     
 	
 	public function validate_pass($pass)

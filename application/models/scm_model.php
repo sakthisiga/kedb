@@ -1,6 +1,6 @@
 <?php
 
-class Scm_model extends CI_Model {
+class scm_model extends CI_Model {
     
 	
 	public function validate_pass($pass)
