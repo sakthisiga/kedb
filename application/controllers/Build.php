@@ -2,7 +2,7 @@
 
 // Home Class Begins
 
-class scm extends CI_Controller {
+class Build extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -19,17 +19,17 @@ class scm extends CI_Controller {
 
 	public function index()
 	{
-		$this->search_scm();
+		$this->search_build();
 	}
 		
 	//-------------------------------------------------------------------------------------------
 	//Function : Load the Add Article View
 	//-------------------------------------------------------------------------------------------
-	public function add_scm_support()
+	public function add_build()
 	{
-		$data['title'] = "Add SCM Support Details";
+		$data['title'] = "Add Build Details";
 		$this->load->view('inc/header_view',$data);
-		$this->load->view('scm/scm_add_view');
+		$this->load->view('build/build_add_view');
 		$this->load->view('inc/footer_view');
 	}
 
@@ -37,12 +37,12 @@ class scm extends CI_Controller {
 	//Function : Load the Search Article View
 	//-------------------------------------------------------------------------------------------
 
-	public function search_scm_support()
+	public function search_build()
 	{
-		$data['scmdetails'] = $this->scm_model->get_scm_support_details();
-		$data['title'] = "SCM Support";
+		$data['articles'] = $this->kedb_model->get_articles();
+		$data['title'] = "Articles";
 		$this->load->view('inc/header_view',$data);
-		$this->load->view('scm/scm_search_view',$data);
+		$this->load->view('build/build_search_view',$data);
 		$this->load->view('inc/footer_view');
 	}
 

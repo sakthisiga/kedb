@@ -1,7 +1,7 @@
 <?php
 
 // Login Class Begins
-class login extends CI_Controller {
+class Login extends CI_Controller {
 	
 //-------------------------------------------------------------------------------------------
 //Function : Load Home View (Login Page)

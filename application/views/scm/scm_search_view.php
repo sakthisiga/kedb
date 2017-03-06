@@ -171,7 +171,14 @@
 		                 ],
                  "dom": 'Bfrtip',
                  "buttons": [
-                           'excel', 'print'
+                	 {
+                         extend: 'excelHtml5',
+                         title: 'NYMMIS_SCM_Activities_Report'
+                     },
+                     {
+                         extend: 'print',
+                         title: 'NYMMIS_SCM_Activities_Report'
+                     }
                        ]
         	    });
 

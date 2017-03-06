@@ -2,7 +2,7 @@
 
 // Api Class Begins
 
-class api extends CI_Controller {
+class Api extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -68,7 +68,7 @@ class api extends CI_Controller {
         }
         else 
         {
-            $this->output->set_output(json_encode(['result' => '0', 'error2' => 'Invalid Credentials. <br> If you do not have user account, please click "Register a new membership" link to create a one ']));
+            $this->output->set_output(json_encode(['result' => '0', 'error2' => 'Invalid Credentials, please try again or contact Administrator']));
         }
         
         

@@ -7,11 +7,11 @@
     </div>
     
       <div class="login-logo">
-        <a href="<?=base_url()?>login"><b>NYDEVOPS </b><small>| iTracker</small></a>
+        <a href="<?php echo base_url(); ?>login"><b>NYDEVOPS </b><small>| iTracker</small></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <form id="login_page" class="form-signin" method="post" action="<?=site_url('api/login')?>">
+        <form id="login_page" class="form-signin" method="post" action="<?php echo site_url('api/login'); ?>">
           <div class="form-group has-feedback">
             <input type="text" class="form-control" id="username" name= "username" placeholder="C - ID">
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
@@ -29,7 +29,7 @@
         </form>
 
      <!-- <a href="#">I forgot my password</a><br>
-        <a href="<?=site_url('login/register')?>" class="text-center">Register a new membership</a> -->   
+        <a href="<?php echo site_url('login/register'); ?>" class="text-center">Register a new membership</a> -->   
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
@@ -54,7 +54,7 @@ $(function(){
 	        
 	        $.post(url, postData, function(o){
 	           if(o.result == 1) {
-	               window.location.href = '<?=site_url('home')?>';
+	               window.location.href = '<?php echo site_url('home'); ?>';
 	           } 
 	           else
 	           {
