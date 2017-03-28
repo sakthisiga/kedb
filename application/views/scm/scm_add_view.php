@@ -141,8 +141,9 @@
                   
 <!--  Submit Button -->
                   <div class="form-group">
-                    <div class="input-group">
-                      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                    <div class="input-group"><label> &nbsp;</label><div> </div>
+                      <button type="submit" class="btn btn-success btn">Submit</button> &nbsp;
+                      <button type="reset" class="btn btn-primary btn">Reset</button>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->

@@ -312,6 +312,7 @@ class Api extends CI_Controller {
 	    	$this->form_validation->set_rules('name','Name','required');
 	    	$this->form_validation->set_rules('rel','Release','required');
 	    	$this->form_validation->set_rules('build','Build','required');
+	    	$this->form_validation->set_rules('environment','Environment','required');
 	    	$this->form_validation->set_rules('from_date','From Date','required');
 	    	$this->form_validation->set_rules('to_date','To Date','required');
 	    	$this->form_validation->set_rules('status','Status','required');
@@ -334,6 +335,7 @@ class Api extends CI_Controller {
 	    			'user_id' => $this->session->userdata('user_id'),
 	    			'rel' => $this->input->post('rel'),
 	    			'build' => $this->input->post('build'),
+	    			'environment' => $this->input->post('environment'),
 	    			'from_date' => $this->input->post('from_date'),
 	    			'to_date' => $this->input->post('to_date'),
 	    			'status' => $this->input->post('status'),

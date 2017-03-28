@@ -3,8 +3,8 @@
          
         <section class="content-header">
           <h1>
-            Register Build
-            <small>Full/Patch</small>
+            Register Build or Deployment
+            <small>Full/Patch Builds and Full Deployments</small>
           </h1>
         </section>
 
@@ -61,7 +61,7 @@
  
  <!--  Build Field -->
                   <div class="form-group">
-                    <label>Build:</label>
+                    <label>Build/Deployment:</label>
                     <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-gear"></i>
@@ -70,9 +70,34 @@
                       		<option></option>
 							<option>Patch</option>
 							<option>Full</option>
+							<option>Deployment</option>
                     </select>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->
+ <!--  Environment Field -->
+                  <div class="form-group">
+                    <label>Environment:</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-gear"></i>
+                      </div>
+                      	<select id="environment" name="environment" class="form-control">
+                      		<option></option>
+							<option>DEV1</option>
+							<option>DEV2</option>
+							<option>DEV3</option>
+							<option>DEV4</option>
+							<option>DEV5</option>
+							<option>DEV6</option>
+							<option>CAT1</option>
+							<option>CAT2</option>
+							<option>CAT3</option>
+							<option>CAT4</option>
+							<option>CAT5</option>
+							<option>CAT6</option>
+                        </select>
+                      </div><!-- /.input group -->
+                    </div><!-- /.form group -->
                  </div>
                   
                 
@@ -137,8 +162,9 @@
                   
 <!--  Submit Button -->
                   <div class="form-group">
-                    <div class="input-group">
-                      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                    <div class="input-group"><label> &nbsp;</label><div> </div>
+                      <button type="submit" class="btn btn-success btn">Submit</button> &nbsp
+                      <button type="reset" class="btn btn-primary btn">Reset</button>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->

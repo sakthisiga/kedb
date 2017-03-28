@@ -39,13 +39,23 @@ class Build extends CI_Controller {
 
 	public function search_build()
 	{
-		$data['articles'] = $this->kedb_model->get_articles();
-		$data['title'] = "Articles";
+		$data['builds'] = $this->build_model->get_builds();
+		$data['title'] = "Build/Deployment";
 		$this->load->view('inc/header_view',$data);
 		$this->load->view('build/build_search_view',$data);
 		$this->load->view('inc/footer_view');
 	}
-
+	
+	//-------------------------------------------------------------------------------------------
+	//Function : Logout from application (Loads login page)
+	//-------------------------------------------------------------------------------------------
+	 
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect("login");
+	}
+	
 	//-------------------------------------------------------------------------------------------
 	//Function : Load the User Profile View
 	//-------------------------------------------------------------------------------------------

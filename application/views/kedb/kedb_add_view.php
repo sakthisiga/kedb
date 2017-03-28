@@ -56,10 +56,10 @@
                   
 <!--  Description Field -->
                   <div class="form-group">
-                    <label>Description:</label>
+                    <label>Solution:</label>
                      <div class="input-group">
                       
-                       <textarea id="description" name="description" class="form-control" rows="7" cols="80" placeholder="A detailed description of the resolution for the problem"></textarea>
+                       <textarea id="description" name="description" class="form-control" rows="7" cols="80" placeholder="A detailed description of the solution for the problem"></textarea>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->     
                 </div><!-- /.col -->    
@@ -109,8 +109,9 @@
                   
 <!--  Submit Button -->
                   <div class="form-group">
-                    <div class="input-group">
-                      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                    <div class="input-group"><label> &nbsp;</label><div> </div>
+                      <button type="submit" class="btn btn-success btn">Submit</button> &nbsp;
+                      <button type="reset" class="btn btn-primary btn">Reset</button>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->

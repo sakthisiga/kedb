@@ -2,8 +2,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Articles
-            <small>with View and Search Options</small>
+            Build or Deployment
+            <small>Full build, Patch build, Full Dpeloyment details</small>
           </h1>
         </section>
 
@@ -13,55 +13,49 @@
             <div class="col-xs-12">
               <div class="box box-warning">
                 <div class="box-body">
-                   <table id="article-table" class="table table-bordered table-condensed">
+                   <table id="build-table" class="table table-bordered table-condensed">
                     <thead>
                       <tr>
-                        <th>Article ID</th>
+                        <th>Build ID</th>
                         <th>Date</th>
-                        <th>Employee ID</th>
-                        <th>Employee Name</th>
-                        <th>State</th>
-                        <th>Tool</th>
-                        <th>Issue</th>
-                        <th>Problem</th>
-                        <th>Description</th>
+                        <th>Name</th>
+                        <th>Release</th>
+                        <th>Build/Deployment</th>
+                        <th>Environment</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Status</th>
+                        <th>Reason</th>
                       </tr>
                     </thead>
                     <tfoot>
 			          <tr>
-			            <th>Article ID</th>
-			            <th>Date</th>
-			            <th>Employee ID</th>
-			            <th>Employee Name</th>
-			            <th>State</th>
-			            <th>Tool</th>
-			            <th>Issue</th>
-			            <th>Problem</th>
-			            <th>Description</th>
+			            <th>Build ID</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Release</th>
+                        <th>Build/Deployment</th>
+                        <th>Environment</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Status</th>
+                        <th>Reason</th>
 			          </tr>
 			        </tfoot>
                     <tbody>
                     
-                      <?php foreach($articles as $row) : ?>
+                      <?php foreach($builds as $row) : ?>
 							<tr>
-								<td> <a data-toggle="modal" 
-										data-aid="<?php echo $row->article_id; ?>" 
-										data-issue="<?php echo $row->issue; ?>"
-										data-problem='<?php echo base64_encode($row->problem); ?>'
-										data-description='<?php echo base64_encode($row->description); ?>' 
-										title="Add this item" 
-										class="open-AddBookDialog btn btn-primary btn-xs" 
-										href="#art-update"><?php echo $row->article_id; ?>
-								     </a> 
-								</td>
+								<td><?php echo $row->build_id; ?></td>
 								<td> <?php echo $row->date; ?> </td>
-								<td> <?php echo $row->user_id; ?> </td>
-								<td> <?php echo $row->emp_name; ?> </td>
-								<td> <?php echo $row->state; ?> </td>
-								<td> <?php echo $row->tool;?> </td>
-								<td> <?php echo $row->issue;?> </td>
-								<td> <?php echo $row->problem;?> </td>
-								<td><xmp> <?php echo $row->description;?></xmp> </td>
+								<td> <?php echo $row->name; ?> </td>
+								<td> <?php echo $row->rel; ?> </td>
+								<td> <?php echo $row->build;?> </td>
+								<td> <?php echo $row->environment;?> </td>
+								<td> <?php echo $row->from_date;?> </td>
+								<td> <?php echo $row->to_date;?> </td>
+								<td><?php echo $row->status;?></td>
+								<td><?php echo $row->reason;?></td>
 							</tr>
 					   <?php endforeach;?>
                     </tbody>
@@ -155,37 +149,26 @@
     	    location.reload();
     	}
        $(document).ready(function() {
-    	   $('#article-table').DataTable({
+    	   $('#build-table').DataTable({
   	    	 	 "paging": true,
                  "lengthChange": true,
                  "searching": true,
                  "ordering": true,
                  "info": true,
                  "autoWidth": true,
-                 "columnDefs": [{
-		                     "targets": [ 7 ],
-		                     "visible": false,
-		                     "searchable": false
-		                 },
-		                 {
-		                     "targets": [ 8 ],
-		                     "visible": false,
-		                     "searchable": false
-		                 }
-		                 ],
                  "dom": 'Bfrtip',
                  "buttons": [
                            'excel', 'print'
                        ]
         	    });
 
-    	   $('#article-table tfoot th').each( function () {
+    	   $('#build-table tfoot th').each( function () {
     	        var title = $(this).text();
     	        $(this).html( '<input type="text" placeholder="...." />' );
     	    } );
     	 
     	    // DataTable
-    	    var table = $('#article-table').DataTable();
+    	    var table = $('#build-table').DataTable();
     	 
     	    // Apply the search
     	    table.columns().every( function () {

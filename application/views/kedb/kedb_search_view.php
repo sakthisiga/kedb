@@ -24,7 +24,7 @@
                         <th>Tool</th>
                         <th>Issue</th>
                         <th>Problem</th>
-                        <th>Description</th>
+                        <th>Solution</th>
                       </tr>
                     </thead>
                     <tfoot>
@@ -37,7 +37,7 @@
 			            <th>Tool</th>
 			            <th>Issue</th>
 			            <th>Problem</th>
-			            <th>Description</th>
+			            <th>Solution</th>
 			          </tr>
 			        </tfoot>
                     <tbody>
@@ -121,7 +121,7 @@
 						                  
 						<!--  Description Field -->
 						                  <div class="form-group">
-						                    <label>Description:</label>
+						                    <label>Solution:</label>
 						                     <div class="input-group">
 						                       <textarea id="description" name="description" class="form-control" rows="7" cols="150" placeholder="A detailed description on the resolution to the issue"></textarea>
 						                    </div><!-- /.input group -->
