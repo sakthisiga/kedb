@@ -6,6 +6,7 @@
             Add an Article
             <small>KEDB</small>
           </h1>
+          <h4><span class="label label-default"><a href="<?=base_url()?>home/search_article">Search Article</a></span></h4>
         </section>
 
 <!-- Main content -->

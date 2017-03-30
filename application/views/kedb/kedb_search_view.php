@@ -2,9 +2,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Articles
+            View/Edit Articles
             <small>with View and Search Options</small>
           </h1>
+			<h4><span class="label label-default"><a href="<?=base_url()?>home/add_article">Add Article</a></span></h4>
         </section>
 
         <!-- Main content -->

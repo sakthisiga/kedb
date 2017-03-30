@@ -2,9 +2,9 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Build or Deployment
+            View/Edit Build or Deployment
             <small>Full build, Patch build, Full Dpeloyment details</small>
-          </h1>
+          </h1><h4><span class="label label-default"><a href="<?=base_url()?>build/add_build">Add Details</a></span></h4>
         </section>
 
         <!-- Main content -->

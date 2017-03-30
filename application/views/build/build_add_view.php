@@ -6,6 +6,7 @@
             Register Build or Deployment
             <small>Full/Patch Builds and Full Deployments</small>
           </h1>
+          <h4><span class="label label-default"><a href="<?=base_url()?>build/search_build">Search Details</a></span></h4>
         </section>
 
 <!-- Main content -->

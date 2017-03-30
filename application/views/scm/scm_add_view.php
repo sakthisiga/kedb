@@ -6,6 +6,7 @@
             Register SCM Support
             <small>GIT/Jenkins/Sonar/Merge/KLOC</small>
           </h1>
+          <h4><span class="label label-default"><a href="<?=base_url()?>scm/search_scm_support">Search Details</a></span></h4>
         </section>
 
 <!-- Main content -->

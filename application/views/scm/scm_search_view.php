@@ -2,9 +2,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            SCM Support
+            View/Edit SCM Support
             <small>with View, Search and Edit Options</small>
           </h1>
+          <h4><span class="label label-default"><a href="<?=base_url()?>scm/add_scm_support">Add Details</a></span></h4>
         </section>
 
         <!-- Main content -->

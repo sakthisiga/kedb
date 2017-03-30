@@ -23,6 +23,7 @@
     		<link rel="stylesheet" href="<?=base_url()?>public/css/jquery-jvectormap-1.2.2.css">
         	<link rel="stylesheet" href="<?=base_url()?>public/boot/datepicker/datepicker3.css">
         	<link rel="stylesheet" href="<?=base_url()?>public/boot/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+        	<link rel="stylesheet" href="<?=base_url()?>public/css/style.css">
         	
         	
         	        	

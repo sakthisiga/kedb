@@ -25,6 +25,13 @@ class Scm_model extends CI_Model {
 		$query = $this->db->get('scm_activity_tb');
 		return $query->result();
 	}
+	public function get_scm_count($id)
+	{
+		$this->db->where('user_id',$id);
+		$this->db->from('scm_tb');
+		return $this->db->count_all_results();
+		//return $query;
+	}
 	
 	public function get_modal_articles($id)
 	{

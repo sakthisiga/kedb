@@ -37,7 +37,13 @@
                       <b>State</b> <a class="pull-right"><?php echo $row->state; ?></a>
                     </li>
                     <li class="list-group-item">
-                      <b>Articles Contribution</b> <a class="pull-right"><?php echo $a_count; ?></a>
+                      <b>Articles Contribution</b> <a class="pull-right"><span class="badge badge-success"><?php echo $a_count; ?></span></a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Builds Completed</b> <a class="pull-right"><span class="badge badge-error"><?php echo $build_count; ?></span></a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>SCM Activities Completed</b> <a class="pull-right"><span class="badge badge-inverse"><?php echo $scm_count; ?></span></a>
                     </li>
                   </ul>
 
@@ -117,7 +123,7 @@
                       <div class="form-group">
                         <label for="inputName" class="col-lg-3 control-label">Employee Name</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="name" name="name" value="<?=$row->emp_name; ?>">
+                          <input type="text" class="form-control" id="name" name="name" value="<?=$row->emp_name; ?>" readonly>
                         </div>
                       </div>
                       <div class="form-group">
