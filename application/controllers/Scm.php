@@ -28,6 +28,7 @@ class Scm extends CI_Controller {
 	public function add_scm_support()
 	{
 		$data['title'] = "Add SCM Support Details";
+		$data['activities'] = $this->scm_model->get_scm_activity();
 		$this->load->view('inc/header_view',$data);
 		$this->load->view('scm/scm_add_view');
 		$this->load->view('inc/footer_view');
@@ -40,6 +41,7 @@ class Scm extends CI_Controller {
 	public function search_scm_support()
 	{
 		$data['scmdetails'] = $this->scm_model->get_scm_support_details();
+		$data['activities'] = $this->scm_model->get_scm_activity();
 		$data['title'] = "SCM Support";
 		$this->load->view('inc/header_view',$data);
 		$this->load->view('scm/scm_search_view',$data);

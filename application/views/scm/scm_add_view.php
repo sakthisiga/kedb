@@ -51,22 +51,10 @@
                         <i class="fa fa-gear"></i>
                       </div>
                       	<select id="activity" name="activity" class="form-control select2">
-                      		<option></option>
-							<option>GIT Support	</option>
-							<option>Jenkins Support</option>
-							<option>Build Support</option>
-							<option>Patch Build and Deploys</option>
-							<option>Full Builds</option>
-							<option>Deployments (alone)</option>
-							<option>Merge Support</option>
-							<option>Reporting</option>
-							<option>Move IT</option>
-							<option>V1 tracking</option>
-							<option>Meetings</option>
-							<option>SONAR</option>
-							<option>IBM App Scan</option>
-							<option>KLOC</option>
-							<option>Validation</option>
+                      	<option></option>
+                      	<?php foreach($activities as $row) : ?>
+                      	<option><?php echo $row->activity; ?></option>
+                      	<?php endforeach;?>
                     </select>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->

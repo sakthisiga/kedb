@@ -46,6 +46,11 @@
                         <th>Release</th>
                         <th>From</th>
                         <th>To</th>
+                        <th>Time</th>
+                        <th>Day</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>OH/WH</th>
                         <th>Status</th>
                         <th>Comment</th>
                       </tr>
@@ -59,6 +64,11 @@
                         <th>Release</th>
                         <th>From</th>
                         <th>To</th>
+                        <th>Time</th>
+                        <th>Day</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>OH/WH</th>
                         <th>Status</th>
                         <th>Comment</th>
 			          </tr>
@@ -88,6 +98,22 @@
 								<td> <?php echo $row->rel;?> </td>
 								<td> <?php echo $row->from_date;?> </td>
 								<td> <?php echo $row->to_date;?> </td>
+								<td> <?php						
+											$start = new DateTime($row->from_date);
+											$end = new DateTime($row->to_date);
+											$interval = $start->diff($end);
+											$hrs = $interval->d * 24 + $interval->h;
+											echo $hrs.":".$interval->format('%i');
+								     ?> </td>
+								<td><?php echo date("l",strtotime($row->date));?></td>
+								<td><?php echo date("F",strtotime($row->date));?></td>
+								<td><?php echo date("o",strtotime($row->date));?></td>
+								<td><?php
+								$hr = date("G",strtotime($row->from_date));
+								if($hr < 18) {
+									echo "WH"; } else{
+        							echo "OH";}
+								     ?></td>
 								<td> <?php echo $row->status;?> </td>
 								<td><xmp> <?php echo $row->comment;?></xmp> </td>
 							</tr>
@@ -144,21 +170,9 @@
 						                     <div class="input-group">
 						                       <select id="activity" name="activity" class="form-control">
 						                      		<option></option>
-													<option>GIT Support	</option>
-													<option>Jenkins Support</option>
-													<option>Build Support</option>
-													<option>Patch Build and Deploys</option>
-													<option>Full Builds</option>
-													<option>Deployments (alone)</option>
-													<option>Merge Support</option>
-													<option>Reporting</option>
-													<option>Move IT</option>
-													<option>V1 tracking</option>
-													<option>Meetings</option>
-													<option>SONAR</option>
-													<option>IBM App Scan</option>
-													<option>KLOC</option>
-													<option>Validation</option>
+							                      	<?php foreach($activities as $row) : ?>
+							                      	<option><?php echo $row->activity; ?></option>
+							                      	<?php endforeach;?>
 						                    </select>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group -->
@@ -250,7 +264,7 @@
                  "autoWidth": true,
                  "dom": 'Bfrtip',
                  "columnDefs": [{
-                     "targets": [ 8 ],
+                     "targets": [ 13 ],
                      "visible": false,
                      "searchable": false
                  }],

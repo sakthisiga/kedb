@@ -39,28 +39,38 @@
                    <table id="build-table" class="table table-bordered table-condensed">
                     <thead>
                       <tr>
-                        <th>Build ID</th>
+                        <th>ID</th>
                         <th>Date</th>
                         <th>Name</th>
-                        <th>Release</th>
-                        <th>Build/Deployment</th>
-                        <th>Environment</th>
+                        <th>REL</th>
+                        <th>Activity</th>
+                        <th>ENV</th>
                         <th>Start</th>
                         <th>End</th>
+                        <th>Time</th>
+                        <th>Day</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>OH/WH</th>
                         <th>Status</th>
                         <th>Reason</th>
                       </tr>
                     </thead>
                     <tfoot>
 			          <tr>
-			            <th>Build ID</th>
+			            <th>ID</th>
                         <th>Date</th>
                         <th>Name</th>
-                        <th>Release</th>
-                        <th>Build/Deployment</th>
-                        <th>Environment</th>
+                        <th>REL</th>
+                        <th>Activity</th>
+                        <th>ENV</th>
                         <th>Start</th>
                         <th>End</th>
+                        <th>Time</th>
+                        <th>Day</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>OH/WH</th>
                         <th>Status</th>
                         <th>Reason</th>
 			          </tr>
@@ -92,6 +102,22 @@
 								<td> <?php echo $row->environment;?> </td>
 								<td> <?php echo $row->from_date;?> </td>
 								<td> <?php echo $row->to_date;?> </td>
+								<td> <?php						
+											$start = new DateTime($row->from_date);
+											$end = new DateTime($row->to_date);
+											$interval = $start->diff($end);
+											$hrs = $interval->d * 24 + $interval->h;
+											echo $hrs.":".$interval->format('%i');
+								     ?> </td>
+								<td><?php echo date("l",strtotime($row->date));?></td>
+								<td><?php echo date("F",strtotime($row->date));?></td>
+								<td><?php echo date("o",strtotime($row->date));?></td>
+								<td><?php
+								$hr = date("G",strtotime($row->from_date));
+								if($hr < 18) {
+									echo "WH"; } else{
+        							echo "OH";}
+								     ?></td>
 								<td><?php echo $row->status;?></td>
 								<td><?php echo $row->reason;?></td>
 							</tr>
