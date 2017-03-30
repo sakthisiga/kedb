@@ -13,6 +13,29 @@
             <div class="col-xs-12">
               <div class="box box-warning">
                 <div class="box-body">
+                <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#search"><b>Custom Search</b></button><p></p>
+                  <div class="container col-xs-12">
+				   <div id="search" class="collapse">
+				   <div class="panel panel-default">
+  					<div class="panel-body">
+    				  <form class="form-horizontal">
+						  <div class="form-group">
+						    <label for="fromdate" class="col-sm-2 control-label">From Date:</label>
+						    <div class="col-sm-5">
+						      <input type="text" id="date_min" name="date_min" placeholder="Select - From Date">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="todate" class="col-sm-2 control-label">To Date:</label>
+						    <div class="col-sm-5">
+						      <input type="text" id="date_max" name="date_max" placeholder="Select - To Date">
+						    </div>
+						  </div>
+						</form>
+  					  </div>
+				    </div>
+				  </div>
+				</div>
                    <table id="article-table" class="table table-bordered table-condensed">
                     <thead>
                       <tr>
@@ -44,16 +67,20 @@
                     
                       <?php foreach($scmdetails as $row) : ?>
 							<tr>
-								<td> <?php echo $row->scm_id; ?>
-								<!-- <a data-toggle="modal" 
+								<td><a data-toggle="modal" 
 										data-sid="<?php echo $row->scm_id; ?>" 
-										data-activity="<?php echo $row->activity; ?>"
-										data-fromdate='<?php echo base64_encode($row->from_date); ?>'
-										data-comment='<?php echo base64_encode($row->comment); ?>' 
+										data-date="<?php echo $row->date; ?>"
+										data-name='<?php echo $row->name; ?>'
+										data-activity='<?php echo $row->activity; ?>'
+										data-release='<?php echo $row->rel; ?>'
+										data-sdate='<?php echo $row->from_date; ?>'
+										data-edate='<?php echo $row->to_date; ?>'
+										data-status='<?php echo $row->status; ?>'
+										data-comment='<?php echo base64_encode($row->comment); ?>'
 										title="Add this item" 
 										class="open-AddBookDialog btn btn-primary btn-xs" 
-										href="#art-update"><?php echo $row->scm_id; ?>
-								     </a>  -->
+										href="#scm-update"><?php echo $row->scm_id; ?>
+								     </a>
 								</td>
 								<td> <?php echo $row->date; ?> </td>
 								<td> <?php echo $row->name; ?> </td>
@@ -70,7 +97,7 @@
                   
 
 						<!-- Modal -->
-						<div id="art-update" class="modal fade" role="dialog">
+						<div id="scm-update" class="modal fade" role="dialog">
 						  <div class="modal-dialog modal-lg">
 						
 						    <!-- Modal content-->
@@ -80,57 +107,115 @@
 						        <h4 class="modal-title"><strong>SCM Support</strong> - <small>View and Edit</small></h4>
 						      </div>
 						      <div class="modal-body">
-						      
-						      
-						        
-						        	<div class="box-body">			
-						              <div class="row">
-						              
-						             <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>
-						         			
-						         			
-						              <form id="update_article" class="form-entry" method="post" action="<?=site_url('api/update_scm_support')?>">
-						
-						<!--  Article ID Field -->
+						        <div class="box-body">			
+						          <div class="row">			              
+						            <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>	         			
+						              <form id="update_scm" class="form-entry" method="post" action="<?=site_url('api/update_scm_support')?>">
+						                <div class="col-md-5">
+						<!--  SCM ID Field -->
 						         			<div class="form-group">
 							                    <label>SCM ID:</label>
 							                    <div class="input-group">
-							                      <div class="input-group-addon">
-							                        <i class="fa fa-arrow-circle-right"></i>
-							                      </div>
-							                      <input type="text" id="aid" name="aid" class="form-control" name="aid" placeholder="Brief description of the issue/problem" readonly>
+							                      <input type="text" id="sid" name="sid" class="form-control" readonly>
 							                    </div><!-- /.input group -->
 						                  	</div><!-- /.form group -->
 						                  	
-						<!--  Issue Field -->
+						<!--  Date Field -->
 						         			<div class="form-group">
-							                    <label>Issue:</label>
+							                    <label>Date:</label>
 							                    <div class="input-group">
-							                      <div class="input-group-addon">
-							                        <i class="fa fa-info-circle"></i>
-							                      </div>
-							                      <input type="text" id="issue" name="issue" class="form-control" name="issue" placeholder="Brief description of the issue/problem">
+							                      <input type="text" id="date" name="date" class="form-control">
 							                    </div><!-- /.input group -->
 						                  	</div><!-- /.form group -->
-						<!--  Problem Field -->
+						<!--  Name Field -->
 						                  <div class="form-group">
-						                    <label>Problem:</label>
+						                    <label>Name:</label>
 						                     <div class="input-group">
-						                       <textarea id="problem" name="problem" class="form-control" rows="2" cols="150" placeholder="A detailed description of the problem"></textarea>
+						                       <select id="name" name="name" class="form-control">
+														<option>Ganesh</option>
+														<option>Sakthivel</option>
+														<option>John</option>
+							                    </select>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group --> 
-						                  
-						<!--  Description Field -->
+						 <!--  Activity Field -->
 						                  <div class="form-group">
-						                    <label>Description:</label>
+						                    <label>Activity:</label>
 						                     <div class="input-group">
-						                       <textarea id="description" name="description" class="form-control" rows="7" cols="150" placeholder="A detailed description on the resolution to the issue"></textarea>
+						                       <select id="activity" name="activity" class="form-control">
+						                      		<option></option>
+													<option>GIT Support	</option>
+													<option>Jenkins Support</option>
+													<option>Build Support</option>
+													<option>Patch Build and Deploys</option>
+													<option>Full Builds</option>
+													<option>Deployments (alone)</option>
+													<option>Merge Support</option>
+													<option>Reporting</option>
+													<option>Move IT</option>
+													<option>V1 tracking</option>
+													<option>Meetings</option>
+													<option>SONAR</option>
+													<option>IBM App Scan</option>
+													<option>KLOC</option>
+													<option>Validation</option>
+						                    </select>
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->
+						 <!--  Release Field -->
+						                  <div class="form-group">
+						                    <label>Release:</label>
+						                     <div class="input-group">
+						                       <select id="release" name="release" class="form-control">
+							                      		<option></option>
+														<option>R1</option>
+														<option>R1.5</option>
+														<option>R2</option>
+														<option>NA</option>
+							                    </select>
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group --> 
+						                 </div>
+						                 <div class="col-md-5">
+						  <!--  Start Date Field -->
+						                  <div class="form-group">
+						                    <label>From Date:</label>
+						                     <div class="input-group">
+						                       <input type="text" id="sdate" name="sdate" class="form-control">
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->                   
+						<!--  End Date Field -->
+						                  <div class="form-group">
+						                    <label>To Date:</label>
+						                     <div class="input-group">
+						                       <input type="text" id="edate" name="edate" class="form-control">
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->  
+						<!--  Status Field -->
+						                  <div class="form-group">
+						                    <label>Status:</label>
+						                     <div class="input-group">
+						                       <select id="status" name="status" class="form-control">
+							                      		<option></option>
+														<option>Completed</option>
+														<option>Not Completed</option>
+														<option>Aborted</option>
+							                    </select>
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->
+						                                                 
+						<!--  Comment Field -->
+						                  <div class="form-group">
+						                    <label>Comment:</label>
+						                     <div class="input-group">
+						                       <textarea id="comment" name="comment" class="form-control" rows="7" cols="150"></textarea>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group --> 
 						                   <div class="modal-footer">
-						        				<button type="button" class="btn bg-orange" onclick="pageload()" data-dismiss="modal">Close</a>
 						        				<button type="submit" class="btn btn-primary">Save changes</button>
+						        				<button type="button" class="btn bg-orange" onclick="pageload()" data-dismiss="modal">Close</a>
 						      				</div>
+						      			  </div>	
 						             	</form>
 						               </div> <!--  row -->
 						            </div>      
@@ -163,25 +248,33 @@
                  "ordering": true,
                  "info": true,
                  "autoWidth": true,
-                 "columnDefs": [{
-		                     "targets": [ 8 ],
-		                     "visible": false,
-		                     "searchable": false
-		                 }
-		                 ],
                  "dom": 'Bfrtip',
+                 "columnDefs": [{
+                     "targets": [ 8 ],
+                     "visible": false,
+                     "searchable": false
+                 }],
                  "buttons": [
-                	 {
-                         extend: 'excelHtml5',
-                         title: 'NYMMIS_SCM_Activities_Report'
-                     },
-                     {
-                         extend: 'print',
-                         title: 'NYMMIS_SCM_Activities_Report'
-                     }
-                       ]
+                     'excel', 'print'
+                 ]
         	    });
 
+    	   $.fn.dataTable.ext.search.push(
+   			    function( settings, data, dataIndex ) {
+   			        var min = Date.parse( $('#date_min').val(), 10 );
+   			        var max = Date.parse( $('#date_max').val(), 10 );
+   			        var date = Date.parse( data[1] ) || 0; // use data for the age column
+   			 
+   			        if ( ( isNaN( min ) && isNaN( max ) ) ||
+   			             ( isNaN( min ) && date <= max ) ||
+   			             ( min <= date   && isNaN( max ) ) ||
+   			             ( min <= date   && date <= max ) )
+   			        {
+   			            return true;
+   			        }
+   			        return false;
+   			    }
+   			);
     	   $('#article-table tfoot th').each( function () {
     	        var title = $(this).text();
     	        $(this).html( '<input type="text" placeholder="...." />' );
@@ -201,24 +294,45 @@
     	                    .draw();
     	            }
     	        } );
+    	        $('#date_min, #date_max').on( 'blur', function() {
+    	            table.draw();
+    	        } );
     	    } );
 
       	    
     	});
 
        $(document).on("click", ".open-AddBookDialog", function () {
-    	     var Aid = $(this).data('aid');
-    	     $(".modal-body #aid").val( Aid );
-
-    	     var Issue = $(this).data('issue');
-    	     $(".modal-body #issue").val( Issue );
-
-    	     var Problem = $(this).data('problem');
-    	     Problem = atob(Problem);
-    	     $(".modal-body #problem").val( Problem );
-    	     
-    	     var Desc = $(this).data('description');
-    	     Desc = atob(Desc);
-    	     $(".modal-body #description").val( Desc );
+    	     $(".modal-body #sid").val( $(this).data('sid') );
+    	     $(".modal-body #date").val( $(this).data('date') );
+    	     $(".modal-body #name").val( $(this).data('name') );
+    	     $(".modal-body #activity").val( $(this).data('activity') );
+    	     $(".modal-body #release").val( $(this).data('release') );
+    	     $(".modal-body #sdate").val( $(this).data('sdate') );
+    	     $(".modal-body #edate").val( $(this).data('edate') );
+    	     $(".modal-body #status").val( $(this).data('status') );
+			 $(".modal-body #comment").val( atob($(this).data('comment')) );
     	});
+
+       //Initialize Select2 Elements
+       $(".select2").select2({
+       		tags: true
+       })
+       
+       $('#date').datetimepicker({
+           format: 'YYYY-MM-DD'
+       });
+       $('#sdate').datetimepicker({
+           format: 'YYYY-MM-DD HH:mm'
+       });
+       $('#edate').datetimepicker({
+           format: 'YYYY-M-DD HH:mm'
+       });
+
+       $('#date_min').datetimepicker({
+           format: 'YYYY-MM-DD'
+       });
+       $('#date_max').datetimepicker({
+           format: 'YYYY-MM-DD'
+       });
     </script>

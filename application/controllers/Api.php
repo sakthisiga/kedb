@@ -519,6 +519,123 @@ class Api extends CI_Controller {
     	}
     }
 
+    //-------------------------------------------------------------------------------------------
+    // Function : Update SCM Details - From: SCM Search View
+    //-------------------------------------------------------------------------------------------
+    
+    public function update_scm_support()
+    {
+    	$this->_require_login();
+    	$this->output->set_content_type('application_json');
+    	 
+    	$this->form_validation->set_rules('date','Date','required');
+    	$this->form_validation->set_rules('name','Name','required');
+    	$this->form_validation->set_rules('activity','Activity','required');
+    	$this->form_validation->set_rules('release','Release','required');
+    	$this->form_validation->set_rules('sdate','From Date','required');
+    	$this->form_validation->set_rules('edate','To Date','required');
+    	$this->form_validation->set_rules('status','Status','required');
+    
+    	if($this->form_validation->run() == false)
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '0',
+    				'error' => $this->form_validation->error_array()
+    		]));
+    		return false;
+    	}
+    	$this->db->where(['scm_id' => $this->input->post('sid')]);
+    	$this->db->update('scm_tb',[
+    			'date' => $this->input->post('date'),
+    			'name' => $this->input->post('name'),
+    			'activity' => $this->input->post('activity'),
+    			'rel' => $this->input->post('release'),
+    			'from_date' => $this->input->post('sdate'),
+    			'to_date' => $this->input->post('edate'),
+    			'status' => $this->input->post('status'),
+    			'comment' => $this->input->post('comment'),
+    	]);
+    
+    	$result = $this->db->affected_rows();
+    
+    	if($result)
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '1',
+    				'output' => 'SCM details Updated Succesfully'
+    		]));
+    		return false;
+    	}
+    	else
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '2',
+    				'output' => 'Please update a field, before saving changes'
+    		]));
+    		return false;
+    	}
+    
+    }
+    
+    //-------------------------------------------------------------------------------------------
+    // Function : Update Build Details - From: Build Search View
+    //-------------------------------------------------------------------------------------------
+    
+    public function update_build()
+    {
+    	$this->_require_login();
+    	$this->output->set_content_type('application_json');
+    	
+    	$this->form_validation->set_rules('date','Date','required');
+    	$this->form_validation->set_rules('name','Name','required');
+    	$this->form_validation->set_rules('release','Release','required');
+    	$this->form_validation->set_rules('bd','Build','required');
+    	$this->form_validation->set_rules('sdate','From Date','required');
+    	$this->form_validation->set_rules('edate','To Date','required');
+    	$this->form_validation->set_rules('status','Status','required');
+    	$this->form_validation->set_rules('reason','Reason','required');
+    	 
+    	if($this->form_validation->run() == false)
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '0',
+    				'error' => $this->form_validation->error_array()
+    		]));
+    		return false;
+    	}   
+    	$this->db->where(['build_id' => $this->input->post('bid')]);
+    	$this->db->update('build_tb',[
+    			'date' => $this->input->post('date'),
+    			'name' => $this->input->post('name'),
+    			'rel' => $this->input->post('release'),
+    			'build' => $this->input->post('bd'),
+    			'environment' => $this->input->post('environment'),
+    			'from_date' => $this->input->post('sdate'),
+    			'to_date' => $this->input->post('edate'),
+    			'status' => $this->input->post('status'),
+    			'reason' => $this->input->post('reason'),
+    	]);
+    	 
+    	$result = $this->db->affected_rows();
+    	 
+    	if($result)
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '1',
+    				'output' => 'Build details Updated Succesfully'
+    		]));
+    		return false;
+    	}
+    	else
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '2',
+    				'output' => 'Please update a field, before saving changes'
+    		]));
+    		return false;
+    	}
+    	 
+    }
     
 //-------------------------------------------------------------------------------------------
 // Function : Update Article in DB - From: KEDB Search View

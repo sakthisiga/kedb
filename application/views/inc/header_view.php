@@ -164,17 +164,17 @@
             <li class="header">NAVIGATION</li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-globe"></i> <span>Build/Deployment</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gavel"></i> <span>Build/Deployment</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?=base_url()?>build/add_build"><i class="fa fa-circle-o"></i> Add Build</a></li>
-                <li><a href="<?=base_url()?>build/search_build"><i class="fa fa-circle-o"></i> View Build</a></li>
+                <li><a href="<?=base_url()?>build/add_build"><i class="fa fa-circle-o"></i> Add Details</a></li>
+                <li><a href="<?=base_url()?>build/search_build"><i class="fa fa-circle-o"></i> View Details</a></li>
                <!-- <li><a href="<?=base_url()?>build/upload_build"><i class="fa fa-circle-o"></i> Upload Build</a></li> --> 
               </ul>
             </li>
              <li class="treeview">
               <a href="#">
-                <i class="fa fa-globe"></i> <span>SCM Support</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-git-square"></i> <span>SCM Support</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?=base_url()?>scm/add_scm_support"><i class="fa fa-circle-o"></i> Add Details</a></li>
@@ -187,7 +187,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?=base_url()?>home/add_article"><i class="fa fa-circle-o"></i> Add Article</a></li>
-                <li><a href="<?=base_url()?>home/search_article"><i class="fa fa-circle-o"></i> View Article</a></li>
+                <li><a href="<?=base_url()?>home/search_article"><i class="fa fa-circle-o"></i> View Articles</a></li>
               </ul>
             </li>
           </ul>

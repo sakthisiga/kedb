@@ -13,8 +13,32 @@
             <div class="col-xs-12">
               <div class="box box-warning">
                 <div class="box-body">
+                 <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#search"><b>Custom Search</b></button><p></p>
+                  <div class="container col-xs-12">
+				   <div id="search" class="collapse">
+				   <div class="panel panel-default">
+  					<div class="panel-body">
+    				  <form class="form-horizontal">
+						  <div class="form-group">
+						    <label for="fromdate" class="col-sm-2 control-label">From Date:</label>
+						    <div class="col-sm-5">
+						      <input type="text" id="date_min" name="date_min" placeholder="Select - From Date">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="todate" class="col-sm-2 control-label">To Date:</label>
+						    <div class="col-sm-5">
+						      <input type="text" id="date_max" name="date_max" placeholder="Select - To Date">
+						    </div>
+						  </div>
+						</form>
+  					  </div>
+				    </div>
+				  </div>
+				</div>
+
                    <table id="article-table" class="table table-bordered table-condensed">
-                    <thead>
+                    <thead class="thead-inverse">
                       <tr>
                         <th>Article ID</th>
                         <th>Date</th>
@@ -127,8 +151,8 @@
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group --> 
 						                   <div class="modal-footer">
+						                        <button type="submit" class="btn btn-primary">Save changes</button>
 						        				<button type="button" class="btn bg-orange" onclick="pageload()" data-dismiss="modal">Close</a>
-						        				<button type="submit" class="btn btn-primary">Save changes</button>
 						      				</div>
 						             	</form>
 						               </div> <!--  row -->
@@ -178,7 +202,23 @@
                            'excel', 'print'
                        ]
         	    });
-
+    	   $.fn.dataTable.ext.search.push(
+    			    function( settings, data, dataIndex ) {
+    			        var min = Date.parse( $('#date_min').val(), 10 );
+    			        var max = Date.parse( $('#date_max').val(), 10 );
+    			        var date = Date.parse( data[1] ) || 0; // use data for the age column
+    			 
+    			        if ( ( isNaN( min ) && isNaN( max ) ) ||
+    			             ( isNaN( min ) && date <= max ) ||
+    			             ( min <= date   && isNaN( max ) ) ||
+    			             ( min <= date   && date <= max ) )
+    			        {
+    			            return true;
+    			        }
+    			        return false;
+    			    }
+    			);
+			
     	   $('#article-table tfoot th').each( function () {
     	        var title = $(this).text();
     	        $(this).html( '<input type="text" placeholder="...." />' );
@@ -186,7 +226,7 @@
     	 
     	    // DataTable
     	    var table = $('#article-table').DataTable();
-    	 
+	        
     	    // Apply the search
     	    table.columns().every( function () {
     	        var that = this;
@@ -197,6 +237,10 @@
     	                    .search( this.value )
     	                    .draw();
     	            }
+    	        } );
+
+    	        $('#date_min, #date_max').on( 'blur', function() {
+    	            table.draw();
     	        } );
     	    } );
 
@@ -218,4 +262,12 @@
     	     Desc = atob(Desc);
     	     $(".modal-body #description").val( Desc );
     	});
+
+   	//Date Picker
+	$('#date_min').datetimepicker({
+              format: 'YYYY-MM-DD'
+          });
+          $('#date_max').datetimepicker({
+              format: 'YYYY-MM-DD'
+          });
     </script>

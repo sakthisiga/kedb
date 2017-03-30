@@ -6,7 +6,9 @@ var Event = function() {
         console.log('Event has been Created');
         Display = new Display();
         create_todo();
+        update_build();
         create_build();
+        update_scm();
         create_scm();
         update_todo();
         delete_todo();
@@ -91,6 +93,56 @@ var Event = function() {
 	           
     	 });
     };
+
+// ------------------------------------------------------------------------
+    
+    var update_scm = function() {	
+   	 $("#update_scm").submit(function(evt) {
+   		 evt.preventDefault();
+   		 
+ 	        var url = $(this).attr('action');
+ 	        var postData = $(this).serialize();
+ 	        
+ 	        $.post(url, postData, function(o){
+ 	           if(o.result == 1) {
+ 	               Display.success(o.output);
+ 	           }
+ 	           else if(o.result == 2)
+ 	        	   {
+ 	        	   	Display.warning(o.output);
+ 	        	   }
+ 	           else
+ 	           {
+ 	        	   Display.error(o.error);
+ 	           }
+ 	        },'json');	           
+   	 });
+   };
+
+// ------------------------------------------------------------------------
+   
+   var update_build = function() {	
+  	 $("#update_build").submit(function(evt) {
+  		 evt.preventDefault();
+  		 
+	        var url = $(this).attr('action');
+	        var postData = $(this).serialize();
+	        
+	        $.post(url, postData, function(o){
+	           if(o.result == 1) {
+	               Display.success(o.output);
+	           }
+	           else if(o.result == 2)
+	        	   {
+	        	   	Display.warning(o.output);
+	        	   }
+	           else
+	           {
+	        	   Display.error(o.error);
+	           }
+	        },'json');	           
+  	 });
+  };
     
  // ------------------------------------------------------------------------
     

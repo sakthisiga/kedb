@@ -13,6 +13,29 @@
             <div class="col-xs-12">
               <div class="box box-warning">
                 <div class="box-body">
+                <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#search"><b>Custom Search</b></button><p></p>
+                  <div class="container col-xs-12">
+				   <div id="search" class="collapse">
+				   <div class="panel panel-default">
+  					<div class="panel-body">
+    				  <form class="form-horizontal">
+						  <div class="form-group">
+						    <label for="fromdate" class="col-sm-2 control-label">From Date:</label>
+						    <div class="col-sm-5">
+						      <input type="text" id="date_min" name="date_min" placeholder="Select - From Date">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="todate" class="col-sm-2 control-label">To Date:</label>
+						    <div class="col-sm-5">
+						      <input type="text" id="date_max" name="date_max" placeholder="Select - To Date">
+						    </div>
+						  </div>
+						</form>
+  					  </div>
+				    </div>
+				  </div>
+				</div>
                    <table id="build-table" class="table table-bordered table-condensed">
                     <thead>
                       <tr>
@@ -46,7 +69,22 @@
                     
                       <?php foreach($builds as $row) : ?>
 							<tr>
-								<td><?php echo $row->build_id; ?></td>
+								<td>
+								<a data-toggle="modal" 
+										data-bid="<?php echo $row->build_id; ?>" 
+										data-date="<?php echo $row->date; ?>"
+										data-name='<?php echo $row->name; ?>'
+										data-release='<?php echo $row->rel; ?>'
+										data-bd='<?php echo $row->build; ?>'
+										data-environment='<?php echo $row->environment; ?>'
+										data-sdate='<?php echo $row->from_date; ?>'
+										data-edate='<?php echo $row->to_date; ?>'
+										data-status='<?php echo $row->status; ?>'
+										data-reason='<?php echo $row->reason; ?>'
+										title="View and Edit" 
+										class="open-AddBookDialog btn btn-primary btn-xs" 
+										href="#build-update"><?php echo $row->build_id; ?>
+								     </a> 
 								<td> <?php echo $row->date; ?> </td>
 								<td> <?php echo $row->name; ?> </td>
 								<td> <?php echo $row->rel; ?> </td>
@@ -63,66 +101,139 @@
                   
 
 						<!-- Modal -->
-						<div id="art-update" class="modal fade" role="dialog">
+						<div id="build-update" class="modal fade" role="dialog">
 						  <div class="modal-dialog modal-lg">
 						
 						    <!-- Modal content-->
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" onclick="pageload()">&times;</button>
-						        <h4 class="modal-title"><strong>Article</strong> - <small>View and Update</small></h4>
+						        <h4 class="modal-title"><strong>Build/Deployment</strong> - <small>View and Update</small></h4>
 						      </div>
 						      <div class="modal-body">
-						      
-						      
-						        
-						        	<div class="box-body">			
-						              <div class="row">
-						              
-						             <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>
-						         			
-						         			
-						              <form id="update_article" class="form-entry" method="post" action="<?=site_url('api/update_article')?>">
-						
-						<!--  Article ID Field -->
+						        <div class="box-body">			
+						          <div class="row">
+						            <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>
+						              <form id="update_build" class="form-entry" method="post" action="<?=site_url('api/update_build')?>">
+						                <div class="col-md-5">
+						<!--  Build ID Field -->
 						         			<div class="form-group">
-							                    <label>Article ID:</label>
+							                    <label>Build ID:</label>
 							                    <div class="input-group">
-							                      <div class="input-group-addon">
-							                        <i class="fa fa-arrow-circle-right"></i>
-							                      </div>
-							                      <input type="text" id="aid" name="aid" class="form-control" name="aid" placeholder="Brief description of the issue/problem" readonly>
+							                      <input type="text" id="bid" name="bid" class="form-control" readonly>
 							                    </div><!-- /.input group -->
 						                  	</div><!-- /.form group -->
-						                  	
-						<!--  Issue Field -->
+						<!--  Name Field -->
 						         			<div class="form-group">
-							                    <label>Issue:</label>
+							                    <label>Name:</label>
 							                    <div class="input-group">
-							                      <div class="input-group-addon">
-							                        <i class="fa fa-info-circle"></i>
-							                      </div>
-							                      <input type="text" id="issue" name="issue" class="form-control" name="issue" placeholder="Brief description of the issue/problem">
+							                      <select id="name" name="name" class="form-control">
+														<option>Ganesh</option>
+														<option>Sakthivel</option>
+														<option>John</option>
+							                    </select>
 							                    </div><!-- /.input group -->
 						                  	</div><!-- /.form group -->
-						<!--  Problem Field -->
+						                  	                  	
+						<!--  Date Field -->
+						         			<div class="form-group">
+							                    <label>Date:</label>
+							                    <div class="input-group">
+							                      <input type="text" id="date" name="date" class="form-control">
+							                    </div><!-- /.input group -->
+						                  	</div><!-- /.form group -->
+						<!--  Release Field -->
 						                  <div class="form-group">
-						                    <label>Problem:</label>
+						                    <label>Release:</label>
 						                     <div class="input-group">
-						                       <textarea id="problem" name="problem" class="form-control" rows="2" cols="150" placeholder="A detailed description of the problem"></textarea>
+						                       <select id="release" name="release" class="form-control">
+							                      		<option></option>
+														<option>R1</option>
+														<option>R1.5</option>
+														<option>R2</option>
+							                    </select>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group --> 
 						                  
-						<!--  Description Field -->
+						<!--  Build/Deployment Field -->
 						                  <div class="form-group">
-						                    <label>Description:</label>
+						                    <label>Build/Deployment:</label>
 						                     <div class="input-group">
-						                       <textarea id="description" name="description" class="form-control" rows="7" cols="150" placeholder="A detailed description on the resolution to the issue"></textarea>
+						                       <select id="bd" name="bd" class="form-control">
+						                      		<option></option>
+													<option>Patch</option>
+													<option>Full</option>
+													<option>Deployment</option>
+						                    </select>
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->  
+						                 </div>
+						                  
+						                  
+						                  <div class="col-md-5">
+						<!--  Environment Field -->
+						                  <div class="form-group">
+						                    <label>Environment:</label>
+						                     <div class="input-group">
+  											  <select id="environment" name="environment" class="form-control">
+						                      		<option></option>
+													<option>DEV1</option>
+													<option>DEV2</option>
+													<option>DEV3</option>
+													<option>DEV4</option>
+													<option>DEV5</option>
+													<option>DEV6</option>
+													<option>CAT1</option>
+													<option>CAT2</option>
+													<option>CAT3</option>
+													<option>CAT4</option>
+													<option>CAT5</option>
+													<option>CAT6</option>
+						                        </select>
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group --> 
+						<!--  Start Date Field -->
+						                  <div class="form-group">
+						                    <label>From Date:</label>
+						                     <div class="input-group">
+						                       <input type="text" id="sdate" name="sdate" class="form-control">
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->                   
+						<!--  End Date Field -->
+						                  <div class="form-group">
+						                    <label>To Date:</label>
+						                     <div class="input-group">
+						                       <input type="text" id="edate" name="edate" class="form-control">
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->  
+						<!--  Status Field -->
+						                  <div class="form-group">
+						                    <label>Status:</label>
+						                     <div class="input-group">
+						                       <select id="status" name="status" class="form-control">
+							                      		<option></option>
+														<option>Failed</option>
+														<option>Success</option>
+							                    </select>
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->                 
+						<!--  Reason Field -->
+						                  <div class="form-group">
+						                    <label>Reason:</label>
+						                     <div class="input-group">
+						                       <select id="reason" name="reason" class="form-control">
+							                      		<option></option>
+														<option>NA</option>
+														<option>Build</option>
+														<option>Package</option>
+														<option>Deployment</option>
+							                    </select>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group --> 
 						                   <div class="modal-footer">
+						                   		<button type="submit" class="btn btn-primary">Save changes</button>
 						        				<button type="button" class="btn bg-orange" onclick="pageload()" data-dismiss="modal">Close</button>
-						        				<button type="submit" class="btn btn-primary">Save changes</button>
+						      				</div>
 						      				</div>
 						             	</form>
 						               </div> <!--  row -->
@@ -162,6 +273,23 @@
                        ]
         	    });
 
+    	   $.fn.dataTable.ext.search.push(
+   			    function( settings, data, dataIndex ) {
+   			        var min = Date.parse( $('#date_min').val(), 10 );
+   			        var max = Date.parse( $('#date_max').val(), 10 );
+   			        var date = Date.parse( data[1] ) || 0; // use data for the age column
+   			 
+   			        if ( ( isNaN( min ) && isNaN( max ) ) ||
+   			             ( isNaN( min ) && date <= max ) ||
+   			             ( min <= date   && isNaN( max ) ) ||
+   			             ( min <= date   && date <= max ) )
+   			        {
+   			            return true;
+   			        }
+   			        return false;
+   			    }
+   			);
+  			
     	   $('#build-table tfoot th').each( function () {
     	        var title = $(this).text();
     	        $(this).html( '<input type="text" placeholder="...." />' );
@@ -181,24 +309,42 @@
     	                    .draw();
     	            }
     	        } );
+    	        $('#date_min, #date_max').on( 'blur', function() {
+    	            table.draw();
+    	        } );
     	    } );
 
       	    
     	});
 
        $(document).on("click", ".open-AddBookDialog", function () {
-    	     var Aid = $(this).data('aid');
-    	     $(".modal-body #aid").val( Aid );
-
-    	     var Issue = $(this).data('issue');
-    	     $(".modal-body #issue").val( Issue );
-
-    	     var Problem = $(this).data('problem');
-    	     Problem = atob(Problem);
-    	     $(".modal-body #problem").val( Problem );
-    	     
-    	     var Desc = $(this).data('description');
-    	     Desc = atob(Desc);
-    	     $(".modal-body #description").val( Desc );
+    	    
+    	     $(".modal-body #bid").val( $(this).data('bid') );
+    	     $(".modal-body #date").val( $(this).data('date') );
+    	     $(".modal-body #name").val( $(this).data('name') );
+    	     $(".modal-body #release").val( $(this).data('release') );
+    	     $(".modal-body #bd").val( $(this).data('bd') );
+    	     $(".modal-body #environment").val( $(this).data('environment') );
+    	     $(".modal-body #sdate").val( $(this).data('sdate') );
+    	     $(".modal-body #edate").val( $(this).data('edate') );
+    	     $(".modal-body #status").val( $(this).data('status') );
+			 $(".modal-body #reason").val( $(this).data('reason') );
     	});
+
+       $('#date').datetimepicker({
+           format: 'YYYY-MM-DD'
+       });
+       $('#sdate').datetimepicker({
+           format: 'YYYY-MM-DD HH:mm'
+       });
+       $('#edate').datetimepicker({
+           format: 'YYYY-M-DD HH:mm'
+       });
+
+       $('#date_min').datetimepicker({
+           format: 'YYYY-MM-DD'
+       });
+       $('#date_max').datetimepicker({
+           format: 'YYYY-MM-DD'
+       });
     </script>
