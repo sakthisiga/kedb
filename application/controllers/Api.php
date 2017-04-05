@@ -54,12 +54,14 @@ class Api extends CI_Controller {
         	$data= $this->user_model->session_data($username);
         	foreach ($data as $rec)
         	{
-        		$emp = $rec->emp_name;
+        		$empfname = $rec->emp_name;
+        		$emplname = $rec->emp_lname;
         		$state = $rec->state;
         	}
         	$this->session->set_userdata([
         			'user_id' => $username,
-        			'emp_name' => $emp,
+        			'emp_name' => $empfname,
+        			'emp_lname' => $emplname,
         			'state' => $state
         	]);
 
@@ -85,7 +87,8 @@ class Api extends CI_Controller {
         $this->output->set_content_type('application_json');
         
         $this->form_validation->set_rules('emp_id','Employee ID','required|min_length[8]|max_length[8]|is_unique[user.emp_id]');
-        $this->form_validation->set_rules('emp_name','Employee Name','required');
+        $this->form_validation->set_rules('emp_name','Employee First Name','required');
+        $this->form_validation->set_rules('emp_lname','Employee Last Name','required');
         $this->form_validation->set_rules('state','State','required');
         $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[user.email]');
         $this->form_validation->set_rules('password','Password','required|min_length[4]|max_length[20]|matches[confirm_password]');
@@ -98,6 +101,7 @@ class Api extends CI_Controller {
         }
         $emp_id =  $this->input->post('emp_id');
         $emp_name =  $this->input->post('emp_name');
+        $emp_lname =  $this->input->post('emp_lname');
         $state= $this->input->post('state');
         $email= $this->input->post('email');
         $password = $this->input->post('password');
@@ -108,6 +112,7 @@ class Api extends CI_Controller {
         $user_id = $this->user_model->insert([
         		'emp_id' => $emp_id,
         		'emp_name' => $emp_name,
+        		'emp_lname' => $emp_lname,
             	'password' => hash('sha256',$password.PASS),
             	'email' => $email,
         		'state' => $state,
@@ -118,7 +123,8 @@ class Api extends CI_Controller {
         {
             $this->session->set_userdata([
             		'user_id' => $emp_id,
-            		'emp_name' => $emp_name
+            		'emp_name' => $emp_name,
+            		'emp_lname' => $emp_lname
             ]);
             $this->output->set_output(json_encode(['result' => '1']));
             return false;
@@ -635,6 +641,36 @@ class Api extends CI_Controller {
     		return false;
     	}
     	 
+    }
+    
+    //-------------------------------------------------------------------------------------------
+    // Function : Delete Build in DB - From: Build Search View
+    //-------------------------------------------------------------------------------------------
+    
+    
+    public function delete_build($build_id)
+    {
+    	$this->output->set_content_type('application_json');
+    	$result = $this->build_model->delete_build($build_id);
+    	if($result)
+    	{
+    		redirect("build/search_build");
+    	}
+    }
+    
+    //-------------------------------------------------------------------------------------------
+    // Function : Delete SCM in DB - From: SCM Search View
+    //-------------------------------------------------------------------------------------------
+    
+    
+    public function delete_scm($scm_id)
+    {
+    	$this->output->set_content_type('application_json');
+    	$result = $this->scm_model->delete_scm($scm_id);
+    	if($result)
+    	{
+    		redirect("scm/search_scm_support");
+    	}
     }
     
 //-------------------------------------------------------------------------------------------

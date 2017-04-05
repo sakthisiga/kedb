@@ -18,12 +18,16 @@
             <span class="glyphicon glyphicon-king form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" name="emp_name" placeholder="Employee Name">
+            <input type="text" class="form-control" name="emp_name" placeholder="Employee First Name">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" name="emp_lname" placeholder="Employee Last Name">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           
           <div class="form-group has-feedback">
-            <select name="state" class="form-control" placeholder="State">
+            <select name="state" class="form-control">
 					<option disabled selected> Select a State</option>
 				<?php foreach($states as $state) : ?>
 					<option> <?php echo $state->state_name; ?> </option>

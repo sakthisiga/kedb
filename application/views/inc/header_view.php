@@ -123,7 +123,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="<?=$dp_image ?>" class="user-image" alt="User Image">
-                  <span class="hidden-xs"><?php echo $this->session->userdata('emp_name'); ?></span>
+                  <span class="hidden-xs"><?php echo $this->session->userdata('emp_name'), " ".$this->session->userdata('emp_lname');?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->

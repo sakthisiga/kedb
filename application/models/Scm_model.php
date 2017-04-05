@@ -33,6 +33,14 @@ class Scm_model extends CI_Model {
 		//return $query;
 	}
 	
+	public function delete_scm($id)
+	{
+		$this->db->where('scm_id', $id);
+		$this->db->delete('scm_tb');
+		return $this->db->affected_rows();
+	}
+	
+	
 	public function get_modal_articles($id)
 	{
 		$this->db->where('article_id',$id);

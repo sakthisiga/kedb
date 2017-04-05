@@ -54,6 +54,7 @@
                         <th>OH/WH</th>
                         <th>Status</th>
                         <th>Comment</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tfoot>
@@ -72,6 +73,7 @@
                         <th>OH/WH</th>
                         <th>Status</th>
                         <th>Comment</th>
+                        <th></th>
 			          </tr>
 			        </tfoot>
                     <tbody>
@@ -117,6 +119,11 @@
 								     ?></td>
 								<td> <?php echo $row->status;?> </td>
 								<td><xmp> <?php echo $row->comment;?></xmp> </td>
+								<td>						
+								     <a class="btn btn-danger btn-xs" href="<?=site_url('api/delete_scm/'.$row->scm_id)?>">
+								     <span class="glyphicon glyphicon-trash"></span>
+								    </a>
+								</td>
 							</tr>
 					   <?php endforeach;?>
                     </tbody>
@@ -260,7 +267,7 @@
   	    	 	 "paging": true,
                  "lengthChange": true,
                  "searching": true,
-                 "ordering": true,
+                 "order": ([ 1, "desc" ],[0, "desc"]),
                  "info": true,
                  "autoWidth": true,
                  "dom": 'Bfrtip',

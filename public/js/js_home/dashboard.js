@@ -6,7 +6,6 @@ var Dashboard = function() {
         console.log('Dashboard has been Created');
         Event       = new Event();
         Template    = new Template();
-        load_article();
        // Display     = new Display();
         $("#error").hide();
         $("#success").hide();
@@ -14,17 +13,6 @@ var Dashboard = function() {
         
     };
     
-    // ------------------------------------------------------------------------
-    
-    var load_article = function() {
-       Display.show_data();
-    };
-    
-    // ------------------------------------------------------------------------
-    
-    var load_note = function() {
-        
-    };
     
     // ------------------------------------------------------------------------
     

@@ -16,4 +16,10 @@ class Build_model extends CI_Model {
 		return $this->db->count_all_results();
 		//return $query;
 	}
+	public function delete_build($id)
+	{
+		$this->db->where('build_id', $id);
+		$this->db->delete('build_tb');
+		return $this->db->affected_rows();
+	}
 }

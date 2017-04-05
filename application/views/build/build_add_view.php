@@ -171,7 +171,7 @@
                 </div><!-- /.col -->
                 </form>
               </div><!-- /.row -->         
-            </div><!-- /.box-body -->    	
+            </div><!-- /.box-body -->    
            </div><!-- /.box -->
         </section><!-- /.content -->
         
@@ -187,9 +187,10 @@
 
 		//Date Picker
 		$('#date').datepicker({
-		    startDate: '0d',
+		    startDate: '-10d',
 		    autoclose: true
 		});
+		
  
           $('#from_date').datetimepicker({
               format: 'YYYY-MM-DD HH:mm'

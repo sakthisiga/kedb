@@ -54,6 +54,7 @@
                         <th>OH/WH</th>
                         <th>Status</th>
                         <th>Reason</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tfoot>
@@ -73,6 +74,7 @@
                         <th>OH/WH</th>
                         <th>Status</th>
                         <th>Reason</th>
+                        <th></th>
 			          </tr>
 			        </tfoot>
                     <tbody>
@@ -120,6 +122,11 @@
 								     ?></td>
 								<td><?php echo $row->status;?></td>
 								<td><?php echo $row->reason;?></td>
+								<td>						
+								     <a class="btn btn-danger btn-xs" href="<?=site_url('api/delete_build/'.$row->build_id)?>">
+								     <span class="glyphicon glyphicon-trash"></span>
+								    </a>
+								</td>
 							</tr>
 					   <?php endforeach;?>
                     </tbody>
@@ -282,15 +289,17 @@
       
       
        <script>
+       
        function pageload() {
     	    location.reload();
     	}
+      	
        $(document).ready(function() {
     	   $('#build-table').DataTable({
   	    	 	 "paging": true,
                  "lengthChange": true,
                  "searching": true,
-                 "ordering": true,
+                 "order": ([ 1, "desc" ],[0, "desc"]),
                  "info": true,
                  "autoWidth": true,
                  "dom": 'Bfrtip',
