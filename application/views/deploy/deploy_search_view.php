@@ -2,9 +2,9 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            View/Edit Build
-            <small>Full build and Patch build</small>
-          </h1><h4><span class="label label-default"><a href="<?=base_url()?>build/add_build">Add Details</a></span></h4>
+            View/Edit Deployment
+            <small>Full Dpeloyment details</small>
+          </h1><h4><span class="label label-default"><a href="<?=base_url()?>deploy/add_deploy">Add Details</a></span></h4>
         </section>
 
         <!-- Main content -->
@@ -36,14 +36,12 @@
 				    </div>
 				  </div>
 				</div>
-                   <table id="build-table" class="table table-bordered table-condensed">
+                   <table id="deploy-table" class="table table-bordered table-condensed">
                     <thead>
                       <tr>
                         <th>ID</th>
                         <th>Date</th>
                         <th>Name</th>
-                        <th>REL</th>
-                        <th>Activity</th>
                         <th>ENV</th>
                         <th>Start</th>
                         <th>End</th>
@@ -62,8 +60,6 @@
 			            <th>ID</th>
                         <th>Date</th>
                         <th>Name</th>
-                        <th>REL</th>
-                        <th>Activity</th>
                         <th>ENV</th>
                         <th>Start</th>
                         <th>End</th>
@@ -79,15 +75,13 @@
 			        </tfoot>
                     <tbody>
                     
-                      <?php foreach($builds as $row) : ?>
+                      <?php foreach($deploys as $row) : ?>
 							<tr>
 								<td>
 								<a data-toggle="modal" 
-										data-bid="<?php echo $row->build_id; ?>" 
+										data-did="<?php echo $row->deploy_id; ?>" 
 										data-date="<?php echo $row->date; ?>"
 										data-name='<?php echo $row->name; ?>'
-										data-release='<?php echo $row->rel; ?>'
-										data-bd='<?php echo $row->build; ?>'
 										data-environment='<?php echo $row->environment; ?>'
 										data-sdate='<?php echo $row->from_date; ?>'
 										data-edate='<?php echo $row->to_date; ?>'
@@ -95,12 +89,10 @@
 										data-reason='<?php echo $row->reason; ?>'
 										title="View and Edit" 
 										class="open-AddBookDialog btn btn-primary btn-xs" 
-										href="#build-update"><?php echo $row->build_id; ?>
+										href="#deploy-update"><?php echo $row->deploy_id; ?>
 								     </a> 
 								<td> <?php echo $row->date; ?> </td>
 								<td> <?php echo $row->name; ?> </td>
-								<td> <?php echo $row->rel; ?> </td>
-								<td> <?php echo $row->build;?> </td>
 								<td> <?php echo $row->environment;?> </td>
 								<td> <?php echo $row->from_date;?> </td>
 								<td> <?php echo $row->to_date;?> </td>
@@ -123,7 +115,7 @@
 								<td><?php echo $row->status;?></td>
 								<td><?php echo $row->reason;?></td>
 								<td>						
-								     <a class="btn btn-danger btn-xs" href="<?=site_url('api/delete_build/'.$row->build_id)?>">
+								     <a class="btn btn-danger btn-xs" href="<?=site_url('api/delete_deploy/'.$row->deploy_id)?>">
 								     <span class="glyphicon glyphicon-trash"></span>
 								    </a>
 								</td>
@@ -134,28 +126,36 @@
                   
 
 						<!-- Modal -->
-						<div id="build-update" class="modal fade" role="dialog">
+						<div id="deploy-update" class="modal fade" role="dialog">
 						  <div class="modal-dialog modal-lg">
 						
 						    <!-- Modal content-->
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" onclick="pageload()">&times;</button>
-						        <h4 class="modal-title"><strong>Build</strong> - <small>View and Update</small></h4>
+						        <h4 class="modal-title"><strong>Deployment</strong> - <small>View and Update</small></h4>
 						      </div>
 						      <div class="modal-body">
 						        <div class="box-body">			
 						          <div class="row">
 						            <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>
-						              <form id="update_build" class="form-entry" method="post" action="<?=site_url('api/update_build')?>">
+						              <form id="update_deploy" class="form-entry" method="post" action="<?=site_url('api/update_deploy')?>">
 						                <div class="col-md-5">
-						<!--  Build ID Field -->
+						<!--  deploy ID Field -->
 						         			<div class="form-group">
-							                    <label>Build ID:</label>
+							                    <label>Deploy ID:</label>
 							                    <div class="input-group">
-							                      <input type="text" id="bid" name="bid" class="form-control" readonly>
+							                      <input type="text" id="did" name="did" class="form-control" readonly>
 							                    </div><!-- /.input group -->
 						                  	</div><!-- /.form group -->
+						<!--  Date Field -->
+						         			<div class="form-group">
+							                    <label>Date:</label>
+							                    <div class="input-group">
+							                      <input type="text" id="date" name="date" class="form-control">
+							                    </div><!-- /.input group -->
+						                  	</div><!-- /.form group -->
+						                  	
 						<!--  Name Field -->
 						         			<div class="form-group">
 							                    <label>Name:</label>
@@ -168,42 +168,7 @@
 							                    </div><!-- /.input group -->
 						                  	</div><!-- /.form group -->
 						                  	                  	
-						<!--  Date Field -->
-						         			<div class="form-group">
-							                    <label>Date:</label>
-							                    <div class="input-group">
-							                      <input type="text" id="date" name="date" class="form-control">
-							                    </div><!-- /.input group -->
-						                  	</div><!-- /.form group -->
-						<!--  Release Field -->
-						                  <div class="form-group">
-						                    <label>Release:</label>
-						                     <div class="input-group">
-						                       <select id="release" name="release" class="form-control">
-							                      		<option></option>
-														<option>R1</option>
-														<option>R1.5</option>
-														<option>R2</option>
-							                    </select>
-						                    </div><!-- /.input group -->
-						                  </div><!-- /.form group --> 
-						                  
-						<!--  Build/Deployment Field -->
-						                  <div class="form-group">
-						                    <label>Build/Deployment:</label>
-						                     <div class="input-group">
-						                       <select id="bd" name="bd" class="form-control">
-						                      		<option></option>
-													<option>Patch</option>
-													<option>Full</option>
-													<option>Deployment</option>
-						                    </select>
-						                    </div><!-- /.input group -->
-						                  </div><!-- /.form group -->  
-						                 </div>
-						                  
-						                  
-						                  <div class="col-md-5">
+						
 						<!--  Environment Field -->
 						                  <div class="form-group">
 						                    <label>Environment:</label>
@@ -225,6 +190,12 @@
 						                        </select>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group --> 
+						                  
+						                 </div>
+						                  
+						                  
+						                  <div class="col-md-5">
+						 
 						<!--  Start Date Field -->
 						                  <div class="form-group">
 						                    <label>From Date:</label>
@@ -257,9 +228,11 @@
 						                       <select id="reason" name="reason" class="form-control">
 							                      		<option></option>
 														<option>NA</option>
-														<option>Build</option>
-														<option>Package</option>
-														<option>Deployment</option>
+														<option>WSRP</option>
+														<option>WAS</option>
+														<option>PTL</option>
+														<option>WPS</option>
+														<option>HTML5</option>
 							                    </select>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group --> 
@@ -295,7 +268,7 @@
     	}
       	
        $(document).ready(function() {
-    	   $('#build-table').DataTable({
+    	   $('#deploy-table').DataTable({
   	    	 	 "paging": true,
                  "lengthChange": true,
                  "searching": true,
@@ -325,13 +298,13 @@
    			    }
    			);
   			
-    	   $('#build-table tfoot th').each( function () {
+    	   $('#deploy-table tfoot th').each( function () {
     	        var title = $(this).text();
     	        $(this).html( '<input type="text" placeholder="...." />' );
     	    } );
     	 
     	    // DataTable
-    	    var table = $('#build-table').DataTable();
+    	    var table = $('#deploy-table').DataTable();
     	 
     	    // Apply the search
     	    table.columns().every( function () {
@@ -354,11 +327,9 @@
 
        $(document).on("click", ".open-AddBookDialog", function () {
     	    
-    	     $(".modal-body #bid").val( $(this).data('bid') );
+    	     $(".modal-body #did").val( $(this).data('did') );
     	     $(".modal-body #date").val( $(this).data('date') );
     	     $(".modal-body #name").val( $(this).data('name') );
-    	     $(".modal-body #release").val( $(this).data('release') );
-    	     $(".modal-body #bd").val( $(this).data('bd') );
     	     $(".modal-body #environment").val( $(this).data('environment') );
     	     $(".modal-body #sdate").val( $(this).data('sdate') );
     	     $(".modal-body #edate").val( $(this).data('edate') );

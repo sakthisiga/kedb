@@ -7,7 +7,9 @@ var Event = function() {
         Display = new Display();
         create_todo();
         update_build();
+        update_deploy();
         create_build();
+        create_deploy();
         update_scm();
         create_scm();
         update_todo();
@@ -143,11 +145,57 @@ var Event = function() {
 	        },'json');	           
   	 });
   };
+  
+//------------------------------------------------------------------------
+  
+  var update_deploy = function() {	
+ 	 $("#update_deploy").submit(function(evt) {
+ 		 evt.preventDefault();
+ 		 
+	        var url = $(this).attr('action');
+	        var postData = $(this).serialize();
+	        
+	        $.post(url, postData, function(o){
+	           if(o.result == 1) {
+	               Display.success(o.output);
+	           }
+	           else if(o.result == 2)
+	        	   {
+	        	   	Display.warning(o.output);
+	        	   }
+	           else
+	           {
+	        	   Display.error(o.error);
+	           }
+	        },'json');	           
+ 	 });
+ };
     
  // ------------------------------------------------------------------------
     
     var create_build = function() {
     	 $("#add_build").submit(function(evt) {
+    		 evt.preventDefault();
+  	        var url = $(this).attr('action');
+  	        var postData = $(this).serialize();
+  	        
+  	        $.post(url, postData, function(o){
+  	           if(o.result == 1) {
+  	               Display.success(o.output);
+  	           } 
+  	           else
+  	           {
+  	        	   Display.error(o.error);
+  	           }
+  	        },'json');
+	           
+    	 });
+    };
+    
+// ------------------------------------------------------------------------
+    
+    var create_deploy = function() {
+    	 $("#add_deploy").submit(function(evt) {
     		 evt.preventDefault();
   	        var url = $(this).attr('action');
   	        var postData = $(this).serialize();

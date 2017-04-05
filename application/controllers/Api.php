@@ -366,6 +366,65 @@ class Api extends CI_Controller {
 	    	}
 	    }
 	     
+ // -------------------------------------------------------------------------------------------
+ // Function : Create a build entry in DB - From: BUILD Add View
+ // -------------------------------------------------------------------------------------------
+	    
+	    public function add_deploy()
+	    {
+	    	$this->_require_login();
+	    	 
+	    	$this->output->set_content_type('application_json');
+	    	 
+	    	//Form Validation
+	    	$this->form_validation->set_rules('date','Date','required');
+	    	$this->form_validation->set_rules('name','Name','required');
+	    	$this->form_validation->set_rules('environment','Environment','required');
+	    	$this->form_validation->set_rules('from_date','From Date','required');
+	    	$this->form_validation->set_rules('to_date','To Date','required');
+	    	$this->form_validation->set_rules('status','Status','required');
+	    	$this->form_validation->set_rules('reason','Reason','required');
+	    	 
+	    	if($this->form_validation->run() == false)
+	    	{
+	    		$this->output->set_output(json_encode([
+	    				'result' => '0',
+	    				'error' => $this->form_validation->error_array()
+	    		]));
+	    		return false;
+	    	}
+	    	 
+	    	//Inserting data
+	    	$date = date("Y-m-d ", strtotime($this->input->post('date')));
+	    	$result = $this->db->insert('deploy_tb', [
+	    			'date' => $date,
+	    			'name' => $this->input->post('name'),
+	    			'user_id' => $this->session->userdata('user_id'),
+	    			'environment' => $this->input->post('environment'),
+	    			'from_date' => $this->input->post('from_date'),
+	    			'to_date' => $this->input->post('to_date'),
+	    			'status' => $this->input->post('status'),
+	    			'reason' => $this->input->post('reason')
+	    	]);
+	    	 
+	    	if($result)
+	    	{
+	    		// Get fresh list to be posted to DOM
+	    	  
+	    		$query = $this->db->get_where('deploy_tb',['deploy_id' => $this->db->insert_id()]);
+	    		$this->output->set_output(json_encode([
+	    				'result' => '1',
+	    				'output' => 'Deployment details added successfully..!!',
+	    				'data' => $query->result()
+	    		]));
+	    		return false;
+	    	}
+	    	else
+	    	{
+	    		$this->output->set_output(json_encode(['result' => '0']));
+	    	}
+	    }
+	    
 	    
 // -------------------------------------------------------------------------------------------
 // Function : Create a SCM Support entry in DB - From: SCM Add View
@@ -582,7 +641,6 @@ class Api extends CI_Controller {
     	}
     
     }
-    
     //-------------------------------------------------------------------------------------------
     // Function : Update Build Details - From: Build Search View
     //-------------------------------------------------------------------------------------------
@@ -591,11 +649,70 @@ class Api extends CI_Controller {
     {
     	$this->_require_login();
     	$this->output->set_content_type('application_json');
-    	
+    	 
     	$this->form_validation->set_rules('date','Date','required');
     	$this->form_validation->set_rules('name','Name','required');
     	$this->form_validation->set_rules('release','Release','required');
     	$this->form_validation->set_rules('bd','Build','required');
+    	$this->form_validation->set_rules('sdate','From Date','required');
+    	$this->form_validation->set_rules('edate','To Date','required');
+    	$this->form_validation->set_rules('status','Status','required');
+    	$this->form_validation->set_rules('reason','Reason','required');
+    
+    	if($this->form_validation->run() == false)
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '0',
+    				'error' => $this->form_validation->error_array()
+    		]));
+    		return false;
+    	}
+    	$this->db->where(['build_id' => $this->input->post('bid')]);
+    	$this->db->update('build_tb',[
+    			'date' => $this->input->post('date'),
+    			'name' => $this->input->post('name'),
+    			'rel' => $this->input->post('release'),
+    			'build' => $this->input->post('bd'),
+    			'environment' => $this->input->post('environment'),
+    			'from_date' => $this->input->post('sdate'),
+    			'to_date' => $this->input->post('edate'),
+    			'status' => $this->input->post('status'),
+    			'reason' => $this->input->post('reason'),
+    	]);
+    
+    	$result = $this->db->affected_rows();
+    
+    	if($result)
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '1',
+    				'output' => 'Build details Updated Succesfully'
+    		]));
+    		return false;
+    	}
+    	else
+    	{
+    		$this->output->set_output(json_encode([
+    				'result' => '2',
+    				'output' => 'Please update a field, before saving changes'
+    		]));
+    		return false;
+    	}
+    
+    }
+    
+    //-------------------------------------------------------------------------------------------
+    // Function : Update Deploy Details - From: Deploy Search View
+    //-------------------------------------------------------------------------------------------
+    
+    public function update_deploy()
+    {
+    	$this->_require_login();
+    	$this->output->set_content_type('application_json');
+    	
+    	$this->form_validation->set_rules('date','Date','required');
+    	$this->form_validation->set_rules('name','Name','required');
+    	$this->form_validation->set_rules('environment','Environment','required');
     	$this->form_validation->set_rules('sdate','From Date','required');
     	$this->form_validation->set_rules('edate','To Date','required');
     	$this->form_validation->set_rules('status','Status','required');
@@ -609,12 +726,10 @@ class Api extends CI_Controller {
     		]));
     		return false;
     	}   
-    	$this->db->where(['build_id' => $this->input->post('bid')]);
-    	$this->db->update('build_tb',[
+    	$this->db->where(['deploy_id' => $this->input->post('did')]);
+    	$this->db->update('deploy_tb',[
     			'date' => $this->input->post('date'),
     			'name' => $this->input->post('name'),
-    			'rel' => $this->input->post('release'),
-    			'build' => $this->input->post('bd'),
     			'environment' => $this->input->post('environment'),
     			'from_date' => $this->input->post('sdate'),
     			'to_date' => $this->input->post('edate'),
@@ -628,7 +743,7 @@ class Api extends CI_Controller {
     	{
     		$this->output->set_output(json_encode([
     				'result' => '1',
-    				'output' => 'Build details Updated Succesfully'
+    				'output' => 'Deployment details Updated Succesfully'
     		]));
     		return false;
     	}
@@ -658,6 +773,20 @@ class Api extends CI_Controller {
     	}
     }
     
+    //-------------------------------------------------------------------------------------------
+    // Function : Delete Deploy in DB - From: Deploy Search View
+    //-------------------------------------------------------------------------------------------
+    
+    
+    public function delete_deploy($deploy_id)
+    {
+    	$this->output->set_content_type('application_json');
+    	$result = $this->deploy_model->delete_deploy($deploy_id);
+    	if($result)
+    	{
+    		redirect("deploy/search_deploy");
+    	}
+    }
     //-------------------------------------------------------------------------------------------
     // Function : Delete SCM in DB - From: SCM Search View
     //-------------------------------------------------------------------------------------------

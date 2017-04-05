@@ -3,10 +3,10 @@
          
         <section class="content-header">
           <h1>
-            Register Build
-            <small>Full/Patch Buildss</small>
+            Register Deployment
+            <small>Full Deployments</small>
           </h1>
-          <h4><span class="label label-default"><a href="<?=base_url()?>build/search_build">Search Details</a></span></h4>
+          <h4><span class="label label-default"><a href="<?=base_url()?>deploy/search_deploy">Search Details</a></span></h4>
         </section>
 
 <!-- Main content -->
@@ -17,7 +17,7 @@
             <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>				
             <div class="box-body">			
               <div class="row">
-              <form id="add_build" class="form-entry" method="post" action="<?=site_url('api/add_build')?>">
+              <form id="add_deploy" class="form-entry" method="post" action="<?=site_url('api/add_deploy')?>">
                 <div class="col-md-4">
                 
 <!--  Date Field -->
@@ -44,38 +44,7 @@
 
 
 
-<!--  Release Field -->
-                  <div class="form-group">
-                    <label>Release:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-gear"></i>
-                      </div>
-                      	<select id="rel" name="rel" class="form-control">
-                      		<option></option>
-							<option>R1</option>
-							<option>R1.5</option>
-							<option>R2</option>
-                    </select>
-                    </div><!-- /.input group -->
-                  </div><!-- /.form group -->
- 
- <!--  Build Field -->
-                  <div class="form-group">
-                    <label>Build/Deployment:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-gear"></i>
-                      </div>
-                      	<select id="build" name="build" class="form-control">
-                      		<option></option>
-							<option>Patch</option>
-							<option>Full</option>
-							<option>Deployment</option>
-                    </select>
-                    </div><!-- /.input group -->
-                  </div><!-- /.form group -->
- <!--  Environment Field -->
+<!--  Environment Field -->
                   <div class="form-group">
                     <label>Environment:</label>
                     <div class="input-group">
@@ -99,6 +68,22 @@
                         </select>
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
+                    
+<!--  Status Field -->
+                  <div class="form-group">
+                    <label>Status:</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-gear"></i>
+                      </div>
+                      	<select id="status" name="status" class="form-control">
+                      		<option></option>
+							<option>Failed</option>
+							<option selected="selected">Success</option>
+                    </select>
+                    </div><!-- /.input group -->
+                  </div><!-- /.form group -->
+                  
                  </div>
                   
                 
@@ -127,21 +112,6 @@
                       <input type="text" id="to_date" name="to_date" class="form-control" value="">
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->
-                  
-<!--  Status Field -->
-                  <div class="form-group">
-                    <label>Status:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-gear"></i>
-                      </div>
-                      	<select id="status" name="status" class="form-control">
-                      		<option></option>
-							<option>Failed</option>
-							<option selected="selected">Success</option>
-                    </select>
-                    </div><!-- /.input group -->
-                  </div><!-- /.form group -->
 
 <!--  Reason Field -->
                   <div class="form-group">
@@ -153,9 +123,11 @@
                       	<select id="reason" name="reason" class="form-control">
                       		<option></option>
 							<option selected="selected">NA</option>
-							<option>Build</option>
-							<option>Package</option>
-							<option>Deployment</option>
+							<option>WSRP</option>
+							<option>WAS</option>
+							<option>PTL</option>
+							<option>WPS</option>
+							<option>HTML5</option>
                     </select>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->

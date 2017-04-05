@@ -154,7 +154,7 @@
 
 		//Date Picker
 		$('#date').datepicker({
-		    startDate: '0d',
+		    startDate: '-30d',
 		    autoclose: true
 		});
  

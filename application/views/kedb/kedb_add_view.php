@@ -134,7 +134,6 @@
 
 		//Date Picker
 		$('#date').datepicker({
-		    startDate: '0d',
 		    autoclose: true
 		});
       });

@@ -165,11 +165,21 @@
             <li class="header">NAVIGATION</li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-gavel"></i> <span>Build/Deployment</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gavel"></i> <span>Build</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?=base_url()?>build/add_build"><i class="fa fa-circle-o"></i> Add Details</a></li>
                 <li><a href="<?=base_url()?>build/search_build"><i class="fa fa-circle-o"></i> View Details</a></li>
+               <!-- <li><a href="<?=base_url()?>build/upload_build"><i class="fa fa-circle-o"></i> Upload Build</a></li> --> 
+              </ul>
+            </li>
+              <li class="treeview">
+              <a href="#">
+                <i class="fa fa-download"></i> <span>Deployment</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="<?=base_url()?>deploy/add_deploy"><i class="fa fa-circle-o"></i> Add Details</a></li>
+                <li><a href="<?=base_url()?>deploy/search_deploy"><i class="fa fa-circle-o"></i> View Details</a></li>
                <!-- <li><a href="<?=base_url()?>build/upload_build"><i class="fa fa-circle-o"></i> Upload Build</a></li> --> 
               </ul>
             </li>
