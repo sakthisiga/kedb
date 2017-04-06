@@ -142,9 +142,36 @@
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->
                 </form>
+                 <div class="col-sm-3">
+            		<a data-toggle="modal" title="Upload Builk Data" 
+					   class="btn btn-warning pull-right" 
+					   href="#Upload_Model"><i 
+					   class="fa fa-plus-square"></i>  Import Deploy</a>
+                 </div>
               </div><!-- /.row -->         
             </div><!-- /.box-body -->    
            </div><!-- /.box -->
+           
+           <div id="Upload_Model" class="modal fade" role="dialog">
+				  <div class="modal-dialog modal-sm">
+				
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" onclick="pageload()">&times;</button>
+				        <h4 class="modal-title"><strong>DEPLOY: Upload the CSV File</strong></h4>
+				      </div>
+				      <div class="modal-body">
+				      			<form method="post" action="<?=site_url('api/do_deploy_upload')?>" enctype="multipart/form-data" id="upload_csv" >
+									<input type="file" name="userfile" size="10" class="btn btn-primary btn-sm" /><br />
+									<input type="submit" value="upload" class="btn btn-warning btn-xs" />
+								</form>
+				       </div>
+				    </div>
+				  </div>
+				 </div>
+				 
+				 
         </section><!-- /.content -->
         
         

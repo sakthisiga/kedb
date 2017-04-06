@@ -585,6 +585,124 @@ class Api extends CI_Controller {
     }
 
     //-------------------------------------------------------------------------------------------
+    // Function : Upload Build details from CSV file
+    //-------------------------------------------------------------------------------------------
+    
+    public function do_build_upload()
+    {
+    	$this->gallery_path_url = realpath(APPPATH . '../files/');
+    	$config['upload_path'] = $this->gallery_path_url;
+    	$config['allowed_types'] = 'csv';
+    	$config['file_name'] = "client_file";
+    	$config['overwrite'] = TRUE;
+    
+    	$this->load->library('upload', $config);
+    	if ( ! $this->upload->do_upload('userfile'))
+    	{
+    		$data['error'] = $this->upload->display_errors();
+    		$data['title'] = "Error Upload CSV File";
+    
+    		
+    		$this->load->view('inc/header_view',$data);
+    		$this->load->view('build/build_import_error');
+    		$this->load->view('inc/footer_view');
+    
+    		return false;
+    
+    	}
+        
+    	$data = array('upload_data' => $this->upload->data());
+    
+    	$filename = $data['upload_data']['full_path'];
+    	$file = fopen($filename, "r");
+    	while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
+    	{
+    		if($emapData[0] != "")
+    		{
+    			$result = $this->db->insert('build_tb', [
+    					'date' => date("Y-m-d",strtotime($emapData[0])),
+    					'user_id' => $emapData[2],
+    					'name' => $emapData[3],
+    					'environment' => $emapData[4],
+    					'rel' => $emapData[5],
+    					'build' => $emapData[6],
+    					'from_date' => date("Y-m-d H:i",strtotime($emapData[7])),
+    					'to_date' => date("Y-m-d H:i",strtotime($emapData[8])),
+    					'status' => $emapData[9],
+    					'reason' => $emapData[10],
+    			]);
+    
+    		}
+    		if(!$result)
+    		{
+    			echo "Problem in loading data";
+    			exit;
+    		}
+    	}
+    
+    	fclose($file);
+    	redirect('build/search_build');
+    }
+    
+    //-------------------------------------------------------------------------------------------
+    // Function : Upload Deploy details from CSV file
+    //-------------------------------------------------------------------------------------------
+    
+    public function do_deploy_upload()
+    {
+    	$this->gallery_path_url = realpath(APPPATH . '../files/');
+    	$config['upload_path'] = $this->gallery_path_url;
+    	$config['allowed_types'] = 'csv';
+    	$config['file_name'] = "client_file";
+    	$config['overwrite'] = TRUE;
+    
+    	$this->load->library('upload', $config);
+    	if ( ! $this->upload->do_upload('userfile'))
+    	{
+    		$data['error'] = $this->upload->display_errors();
+    		$data['title'] = "Error Upload CSV File";
+    
+    
+    		$this->load->view('inc/header_view',$data);
+    		$this->load->view('deploy/deploy_import_error');
+    		$this->load->view('inc/footer_view');
+    
+    		return false;
+    
+    	}
+    
+    	$data = array('upload_data' => $this->upload->data());
+    
+    	$filename = $data['upload_data']['full_path'];
+    	$file = fopen($filename, "r");
+    	while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
+    	{
+    		if($emapData[0] != "")
+    		{
+    			$result = $this->db->insert('deploy_tb', [
+    					'date' => date("Y-m-d",strtotime($emapData[0])),
+    					'user_id' => $emapData[3],
+    					'name' => $emapData[2],
+    					'environment' => $emapData[4],
+    					'from_date' => date("Y-m-d H:i",strtotime($emapData[5])),
+    					'to_date' => date("Y-m-d H:i",strtotime($emapData[6])),
+    					'status' => $emapData[7],
+    					'reason' => $emapData[8],
+    			]);
+    
+    		}
+    		if(!$result)
+    		{
+    			echo "Problem in loading data";
+    			exit;
+    		}
+    	}
+    
+    	fclose($file);
+    	redirect('deploy/search_deploy');
+    }
+    
+    //-------------------------------------------------------------------------------------------
     // Function : Update SCM Details - From: SCM Search View
     //-------------------------------------------------------------------------------------------
     
