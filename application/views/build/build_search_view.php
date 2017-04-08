@@ -45,16 +45,18 @@
                         <th>REL</th>
                         <th>Activity</th>
                         <th>ENV</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Time</th>
+                        <th>Build Start</th>
+                        <th>Build End</th>
+                        <th>Deploy End</th>
+                        <th>Build Time</th>
+                        <th>Deploy Time</th>
                         <th>Day</th>
                         <th>Month</th>
                         <th>Year</th>
                         <th>OH/WH</th>
                         <th>Status</th>
                         <th>Reason</th>
-                        <th>Action</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tfoot>
@@ -65,9 +67,11 @@
                         <th>REL</th>
                         <th>Activity</th>
                         <th>ENV</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Time</th>
+                        <th>Build Start</th>
+                        <th>Build End</th>
+                        <th>Deploy End</th>
+                        <th>Build Time</th>
+                        <th>Deploy Time</th>
                         <th>Day</th>
                         <th>Month</th>
                         <th>Year</th>
@@ -90,6 +94,7 @@
 										data-bd='<?php echo $row->build; ?>'
 										data-environment='<?php echo $row->environment; ?>'
 										data-sdate='<?php echo $row->from_date; ?>'
+										data-ebdate='<?php echo $row->build_date; ?>'
 										data-edate='<?php echo $row->to_date; ?>'
 										data-status='<?php echo $row->status; ?>'
 										data-reason='<?php echo $row->reason; ?>'
@@ -103,14 +108,24 @@
 								<td> <?php echo $row->build;?> </td>
 								<td> <?php echo $row->environment;?> </td>
 								<td> <?php echo $row->from_date;?> </td>
+								<td> <?php echo $row->build_date;?> </td>
 								<td> <?php echo $row->to_date;?> </td>
 								<td> <?php						
 											$start = new DateTime($row->from_date);
+											$end = new DateTime($row->build_date);
+											$interval = $start->diff($end);
+											$hrs = $interval->d * 24 + $interval->h;
+											echo $hrs.":".$interval->format('%i');
+								     ?> 
+								</td>
+								<td> <?php						
+											$start = new DateTime($row->build_date);
 											$end = new DateTime($row->to_date);
 											$interval = $start->diff($end);
 											$hrs = $interval->d * 24 + $interval->h;
 											echo $hrs.":".$interval->format('%i');
-								     ?> </td>
+								     ?> 
+								</td>
 								<td><?php echo date("l",strtotime($row->date));?></td>
 								<td><?php echo date("F",strtotime($row->date));?></td>
 								<td><?php echo date("o",strtotime($row->date));?></td>
@@ -190,21 +205,16 @@
 						                  
 						<!--  Build/Deployment Field -->
 						                  <div class="form-group">
-						                    <label>Build/Deployment:</label>
+						                    <label>Build:</label>
 						                     <div class="input-group">
-						                       <select id="bd" name="bd" class="form-control">
+						                       <select id="bd" name="bd" class="form-control" onchange='checkvalue(this.value)'>
 						                      		<option></option>
 													<option>Patch</option>
 													<option>Full</option>
-													<option>Deployment</option>
 						                    </select>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group -->  
-						                 </div>
-						                  
-						                  
-						                  <div class="col-md-5">
-						<!--  Environment Field -->
+						 <!--  Environment Field -->
 						                  <div class="form-group">
 						                    <label>Environment:</label>
 						                     <div class="input-group">
@@ -225,16 +235,28 @@
 						                        </select>
 						                    </div><!-- /.input group -->
 						                  </div><!-- /.form group --> 
+						                 </div>
+						                  
+						                  
+						                  <div class="col-md-5">
+					
 						<!--  Start Date Field -->
 						                  <div class="form-group">
-						                    <label>From Date:</label>
+						                    <label>Build From:</label>
 						                     <div class="input-group">
 						                       <input type="text" id="sdate" name="sdate" class="form-control">
 						                    </div><!-- /.input group -->
-						                  </div><!-- /.form group -->                   
+						                  </div><!-- /.form group --> 
+						<!--  End Build Date Field -->
+						                  <div class="form-group">
+						                    <label>Build End:</label>
+						                     <div class="input-group">
+						                       <input type="text" id="ebdate" name="ebdate" class="form-control">
+						                    </div><!-- /.input group -->
+						                  </div><!-- /.form group -->                                    
 						<!--  End Date Field -->
 						                  <div class="form-group">
-						                    <label>To Date:</label>
+						                    <label>Deployment End:</label>
 						                     <div class="input-group">
 						                       <input type="text" id="edate" name="edate" class="form-control">
 						                    </div><!-- /.input group -->
@@ -289,6 +311,19 @@
       
       
        <script>
+
+       function checkvalue(val)
+       {
+           if(val==="Patch")
+           {
+              document.getElementById('edate').disabled=false;
+       	  }
+           else
+           {
+         	 document.getElementById('edate').value=null;
+              document.getElementById('edate').disabled=true;
+           }
+       }
        
        function pageload() {
     	    location.reload();
@@ -302,7 +337,28 @@
                  "order": ([ 1, "desc" ],[0, "desc"]),
                  "info": true,
                  "autoWidth": true,
-                 "dom": 'Bfrtip',
+				 "dom": 'Blfrtip',
+				 "columnDefs": [{
+                     "targets": [ 11 ],
+                     "visible": false,
+                     "searchable": false
+                 },
+                 {
+                     "targets": [ 12 ],
+                     "visible": false,
+                     "searchable": false
+                 },
+                 {
+                     "targets": [ 13 ],
+                     "visible": false,
+                     "searchable": false
+                 },
+                 {
+                     "targets": [ 16 ],
+                     "visible": false,
+                     "searchable": false
+                 }
+                 ],
                  "buttons": [
                            'excel', 'print'
                        ]
@@ -361,6 +417,7 @@
     	     $(".modal-body #bd").val( $(this).data('bd') );
     	     $(".modal-body #environment").val( $(this).data('environment') );
     	     $(".modal-body #sdate").val( $(this).data('sdate') );
+    	     $(".modal-body #ebdate").val( $(this).data('ebdate') );
     	     $(".modal-body #edate").val( $(this).data('edate') );
     	     $(".modal-body #status").val( $(this).data('status') );
 			 $(".modal-body #reason").val( $(this).data('reason') );
@@ -371,6 +428,9 @@
        });
        $('#sdate').datetimepicker({
            format: 'YYYY-MM-DD HH:mm'
+       });
+       $('#ebdate').datetimepicker({
+           format: 'YYYY-M-DD HH:mm'
        });
        $('#edate').datetimepicker({
            format: 'YYYY-M-DD HH:mm'

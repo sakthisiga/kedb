@@ -162,7 +162,7 @@
                   <div class="tab-pane" id="keynote">
                   		<div class="box box-primary collapsed-box box-solid">
                 			<div class="box-header with-border">
-                  				<h3 class="box-title">New</h3>
+                  				<h3 class="box-title">Add Note</h3>
                   				<div class="box-tools pull-right">
                     				<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                   				</div><!-- /.box-tools -->
@@ -207,8 +207,8 @@
               			<div id="list_keynote" class="panel-body">
 									<table class="table">
 										<th>
-											<td>name</td>
-											<td>age</td>
+											<!-- <td>name</td>
+											<td>age</td> -->
 											</th>
 									</table>
 							</div>

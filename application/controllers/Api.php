@@ -320,7 +320,9 @@ class Api extends CI_Controller {
 	    	$this->form_validation->set_rules('build','Build','required');
 	    	$this->form_validation->set_rules('environment','Environment','required');
 	    	$this->form_validation->set_rules('from_date','From Date','required');
-	    	$this->form_validation->set_rules('to_date','To Date','required');
+	    	$this->form_validation->set_rules('build_date','Build Date','required');
+	    	if($this->input->post('build') == "Patch" | $this->input->post('build') == "" )
+	    	{ $this->form_validation->set_rules('to_date','To Date','required'); }
 	    	$this->form_validation->set_rules('status','Status','required');
 	    	$this->form_validation->set_rules('reason','Reason','required');
 	    	 
@@ -335,6 +337,14 @@ class Api extends CI_Controller {
 	    	 
 	    	//Inserting data
 	    	$date = date("Y-m-d ", strtotime($this->input->post('date')));
+	    	if($this->input->post('build') == "Full")
+	    	{
+	    		$enddate=NULL;
+	    	}
+	    	else
+	    	{
+	    		$enddate=$this->input->post('to_date');
+	    	}
 	    	$result = $this->db->insert('build_tb', [
 	    			'date' => $date,
 	    			'name' => $this->input->post('name'),
@@ -343,7 +353,8 @@ class Api extends CI_Controller {
 	    			'build' => $this->input->post('build'),
 	    			'environment' => $this->input->post('environment'),
 	    			'from_date' => $this->input->post('from_date'),
-	    			'to_date' => $this->input->post('to_date'),
+	    			'build_date' => $this->input->post('build_date'),
+	    			'to_date' => $enddate,
 	    			'status' => $this->input->post('status'),
 	    			'reason' => $this->input->post('reason')
 	    	]);
@@ -773,7 +784,9 @@ class Api extends CI_Controller {
     	$this->form_validation->set_rules('release','Release','required');
     	$this->form_validation->set_rules('bd','Build','required');
     	$this->form_validation->set_rules('sdate','From Date','required');
-    	$this->form_validation->set_rules('edate','To Date','required');
+    	$this->form_validation->set_rules('ebdate','Build Date','required');
+    	if($this->input->post('bd') == "Patch" | $this->input->post('bd') == "" )
+    	{ $this->form_validation->set_rules('edate','To Date','required'); }
     	$this->form_validation->set_rules('status','Status','required');
     	$this->form_validation->set_rules('reason','Reason','required');
     
@@ -785,6 +798,17 @@ class Api extends CI_Controller {
     		]));
     		return false;
     	}
+    	
+    	if($this->input->post('bd') == "Full")
+    	{
+    		$enddate=NULL;
+    	}
+    	else
+    	{
+    		$enddate=$this->input->post('edate');
+    	}
+    	
+    	
     	$this->db->where(['build_id' => $this->input->post('bid')]);
     	$this->db->update('build_tb',[
     			'date' => $this->input->post('date'),
@@ -793,7 +817,8 @@ class Api extends CI_Controller {
     			'build' => $this->input->post('bd'),
     			'environment' => $this->input->post('environment'),
     			'from_date' => $this->input->post('sdate'),
-    			'to_date' => $this->input->post('edate'),
+    			'build_date' => $this->input->post('ebdate'),
+    			'to_date' => $enddate,
     			'status' => $this->input->post('status'),
     			'reason' => $this->input->post('reason'),
     	]);

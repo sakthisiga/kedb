@@ -62,16 +62,15 @@
  
  <!--  Build Field -->
                   <div class="form-group">
-                    <label>Build/Deployment:</label>
+                    <label>Build:</label>
                     <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-gear"></i>
                       </div>
-                      	<select id="build" name="build" class="form-control">
+                      	<select id="build" name="build" class="form-control" onchange='checkvalue(this.value)'>
                       		<option></option>
 							<option>Patch</option>
 							<option>Full</option>
-							<option>Deployment</option>
                     </select>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->
@@ -108,7 +107,7 @@
 
 
         		<div class="form-group">
-                    <label>From:</label>
+                    <label>Build From:</label>
                     <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
@@ -117,9 +116,20 @@
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->
 
+<!--  Build End Date Field -->
+                  <div class="form-group">
+                    <label>Build End:</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" id="build_date" name="build_date" class="form-control" value="">
+                    </div><!-- /.input group -->
+                  </div><!-- /.form group -->
+                  
 <!--  To Date Field -->
                   <div class="form-group">
-                    <label>To:</label>
+                    <label>Deployment End:</label>
                     <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
@@ -165,17 +175,14 @@
                   <div class="form-group">
                     <div class="input-group"><label> &nbsp;</label><div> </div>
                       <button type="submit" class="btn btn-success btn">Submit</button> &nbsp
-                      <button type="reset" class="btn btn-primary btn">Reset</button>
+                      <button type="reset" class="btn btn-primary btn">Reset</button> &nbsp
+                      <a data-toggle="modal" title="Upload Builk Data" 
+					   class="btn btn-warning pull-right" 
+					   href="#Upload_Model">Import</a>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->
                 </form>
-                <div class="col-sm-3">
-            		<a data-toggle="modal" title="Upload Builk Data" 
-					   class="btn btn-warning pull-right" 
-					   href="#Upload_Model"><i 
-					   class="fa fa-plus-square"></i>  Import Build</a>
-                </div>
               </div><!-- /.row -->         
             </div><!-- /.box-body -->    
            </div><!-- /.box -->
@@ -206,6 +213,19 @@
       </div><!-- /.content-wrapper -->
       
       <script>
+      function checkvalue(val)
+      {
+          if(val==="Patch")
+          {
+             document.getElementById('to_date').disabled=false;
+      	  }
+          else
+          {
+        	 document.getElementById('to_date').value=null;
+             document.getElementById('to_date').disabled=true;
+          }
+      }
+      
       $(function () {
         //Initialize Select2 Elements
         $(".select2").select2({
@@ -221,6 +241,10 @@
  
           $('#from_date').datetimepicker({
               format: 'YYYY-MM-DD HH:mm'
+          });
+          
+          $('#build_date').datetimepicker({
+                      format: 'YYYY-MM-DD HH:mm'
           });
           $('#to_date').datetimepicker({
               format: 'YYYY-M-DD HH:mm'

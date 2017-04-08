@@ -137,17 +137,14 @@
                   <div class="form-group">
                     <div class="input-group"><label> &nbsp;</label><div> </div>
                       <button type="submit" class="btn btn-success btn">Submit</button> &nbsp
-                      <button type="reset" class="btn btn-primary btn">Reset</button>
+                      <button type="reset" class="btn btn-primary btn">Reset</button> &nbsp
+                      <a data-toggle="modal" title="Upload Builk Data" 
+					   class="btn btn-warning pull-right" 
+					   href="#Upload_Model">Import</a>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->
                 </form>
-                 <div class="col-sm-3">
-            		<a data-toggle="modal" title="Upload Builk Data" 
-					   class="btn btn-warning pull-right" 
-					   href="#Upload_Model"><i 
-					   class="fa fa-plus-square"></i>  Import Deploy</a>
-                 </div>
               </div><!-- /.row -->         
             </div><!-- /.box-body -->    
            </div><!-- /.box -->

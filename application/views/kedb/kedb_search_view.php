@@ -187,6 +187,7 @@
                  "ordering": true,
                  "info": true,
                  "autoWidth": true,
+				 "dom": 'Blfrtip',
                  "columnDefs": [{
 		                     "targets": [ 7 ],
 		                     "visible": false,
@@ -198,7 +199,6 @@
 		                     "searchable": false
 		                 }
 		                 ],
-                 "dom": 'Bfrtip',
                  "buttons": [
                            'excel', 'print'
                        ]

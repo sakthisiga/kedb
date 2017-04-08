@@ -275,7 +275,7 @@
                  "order": ([ 1, "desc" ],[0, "desc"]),
                  "info": true,
                  "autoWidth": true,
-                 "dom": 'Bfrtip',
+				 "dom": 'Blfrtip',
                  "buttons": [
                            'excel', 'print'
                        ]

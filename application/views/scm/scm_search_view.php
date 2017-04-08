@@ -270,7 +270,7 @@
                  "order": ([ 1, "desc" ],[0, "desc"]),
                  "info": true,
                  "autoWidth": true,
-                 "dom": 'Bfrtip',
+				 "dom": 'Blfrtip',
                  "columnDefs": [{
                      "targets": [ 13 ],
                      "visible": false,
