@@ -623,6 +623,7 @@ class Api extends CI_Controller {
     	}
         
     	$data = array('upload_data' => $this->upload->data());
+    	
     
     	$filename = $data['upload_data']['full_path'];
     	$file = fopen($filename, "r");
@@ -630,6 +631,14 @@ class Api extends CI_Controller {
     	{
     		if($emapData[0] != "")
     		{
+    			if($emapData[9] == "")
+    			{
+    				$to_date=null;
+    			}
+    			else
+    			{
+    				$to_date=date("Y-m-d H:i",strtotime($emapData[9]));
+    			}
     			$result = $this->db->insert('build_tb', [
     					'date' => date("Y-m-d",strtotime($emapData[0])),
     					'user_id' => $emapData[2],
@@ -638,9 +647,10 @@ class Api extends CI_Controller {
     					'rel' => $emapData[5],
     					'build' => $emapData[6],
     					'from_date' => date("Y-m-d H:i",strtotime($emapData[7])),
-    					'to_date' => date("Y-m-d H:i",strtotime($emapData[8])),
-    					'status' => $emapData[9],
-    					'reason' => $emapData[10],
+    					'build_date' => date("Y-m-d H:i",strtotime($emapData[8])),
+    					'to_date' => $to_date,
+    					'status' => $emapData[10],
+    					'reason' => $emapData[11],
     			]);
     
     		}

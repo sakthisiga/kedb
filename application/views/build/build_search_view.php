@@ -43,7 +43,7 @@
                         <th>Date</th>
                         <th>Name</th>
                         <th>REL</th>
-                        <th>Activity</th>
+                        <th>Build</th>
                         <th>ENV</th>
                         <th>Build Start</th>
                         <th>Build End</th>
@@ -65,7 +65,7 @@
                         <th>Date</th>
                         <th>Name</th>
                         <th>REL</th>
-                        <th>Activity</th>
+                        <th>Build</th>
                         <th>ENV</th>
                         <th>Build Start</th>
                         <th>Build End</th>
@@ -118,12 +118,17 @@
 											echo $hrs.":".$interval->format('%i');
 								     ?> 
 								</td>
-								<td> <?php						
+								<td> <?php	
+								       if($row->to_date){
 											$start = new DateTime($row->build_date);
 											$end = new DateTime($row->to_date);
 											$interval = $start->diff($end);
 											$hrs = $interval->d * 24 + $interval->h;
-											echo $hrs.":".$interval->format('%i');
+											echo $hrs.":".$interval->format('%i'); }
+											else 
+											{
+												echo "";
+											}
 								     ?> 
 								</td>
 								<td><?php echo date("l",strtotime($row->date));?></td>

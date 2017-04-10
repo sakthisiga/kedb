@@ -139,8 +139,9 @@
                       <button type="submit" class="btn btn-success btn">Submit</button> &nbsp
                       <button type="reset" class="btn btn-primary btn">Reset</button> &nbsp
                       <a data-toggle="modal" title="Upload Builk Data" 
-					   class="btn btn-warning pull-right" 
-					   href="#Upload_Model">Import</a>
+					   class="btn btn-warning" 
+					   href="#Upload_Model">Import</a> &nbsp
+					   <a href="<?=base_url()?>public/templates/Deploy_Upload_Template.csv">Download Template</a>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->

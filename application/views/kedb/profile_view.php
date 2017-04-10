@@ -86,7 +86,7 @@
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#preset" data-toggle="tab">Reset Password</a></li>
                   <li><a href="#settings" data-toggle="tab">Settings</a></li>
-                  <li><a href="#keynote" data-toggle="tab">KeyNote</a></li>
+                <!--  <li><a href="#keynote" data-toggle="tab">KeyNote</a></li> -->
                 </ul>
                 <div class="tab-content">
                   <div class="active tab-pane" id="preset">
