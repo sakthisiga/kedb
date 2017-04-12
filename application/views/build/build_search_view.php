@@ -100,7 +100,7 @@
 										data-reason='<?php echo $row->reason; ?>'
 										title="View and Edit" 
 										class="open-AddBookDialog btn btn-primary btn-xs" 
-										href="#build-update"><?php echo $row->build_id; ?>
+										href="#build-update"><?php echo "B-".$row->build_id; ?>
 								     </a> 
 								<td> <?php echo $row->date; ?> </td>
 								<td> <?php echo $row->name; ?> </td>

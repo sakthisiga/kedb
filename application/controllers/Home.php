@@ -27,7 +27,7 @@ class Home extends CI_Controller {
 //-------------------------------------------------------------------------------------------		
 		public function add_article()
 		{
-			$data['title'] = "Add an Article";
+			$data['title'] = "Register Article";
 			$this->load->view('inc/header_view',$data);
 			$this->load->view('kedb/kedb_add_view');
 			$this->load->view('inc/footer_view');
@@ -40,7 +40,7 @@ class Home extends CI_Controller {
 		public function search_article()
 		{
 			$data['articles'] = $this->kedb_model->get_articles();
-			$data['title'] = "Articles";
+			$data['title'] = "View or Edit Articles";
 			$this->load->view('inc/header_view',$data);
 			$this->load->view('kedb/kedb_search_view',$data);
 			$this->load->view('inc/footer_view');

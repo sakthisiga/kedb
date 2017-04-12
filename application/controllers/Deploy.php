@@ -27,7 +27,7 @@ class Deploy extends CI_Controller {
 	//-------------------------------------------------------------------------------------------
 	public function add_deploy()
 	{
-		$data['title'] = "Add Deployment Details";
+		$data['title'] = "Register Deployment";
 		$this->load->view('inc/header_view',$data);
 		$this->load->view('deploy/deploy_add_view');
 		$this->load->view('inc/footer_view');
@@ -40,7 +40,7 @@ class Deploy extends CI_Controller {
 	public function search_deploy()
 	{
 		$data['deploys'] = $this->deploy_model->get_deploys();
-		$data['title'] = "View Deployment Details";
+		$data['title'] = "View or Edit Deployment";
 		$this->load->view('inc/header_view',$data);
 		$this->load->view('deploy/deploy_search_view',$data);
 		$this->load->view('inc/footer_view');

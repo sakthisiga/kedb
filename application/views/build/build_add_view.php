@@ -165,7 +165,10 @@
 							<option selected="selected">NA</option>
 							<option>Build</option>
 							<option>Package</option>
-							<option>Deployment</option>
+							<option>WSRP-PTL</option>
+							<option>WAS</option>
+							<option>WPS</option>
+							<option>HTML5</option>
                     </select>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->

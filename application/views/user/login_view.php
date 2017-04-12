@@ -54,7 +54,7 @@ $(function(){
 	        
 	        $.post(url, postData, function(o){
 	           if(o.result == 1) {
-	               window.location.href = '<?php echo site_url('home'); ?>';
+	               window.location.href = '<?php echo site_url('scm/add_scm_support'); ?>';
 	           } 
 	           else
 	           {

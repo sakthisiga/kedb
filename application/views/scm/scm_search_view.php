@@ -92,7 +92,7 @@
 										data-comment='<?php echo base64_encode($row->comment); ?>'
 										title="Add this item" 
 										class="open-AddBookDialog btn btn-primary btn-xs" 
-										href="#scm-update"><?php echo $row->scm_id; ?>
+										href="#scm-update"><?php echo "S-".$row->scm_id; ?>
 								     </a>
 								</td>
 								<td> <?php echo $row->date; ?> </td>

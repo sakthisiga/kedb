@@ -76,7 +76,7 @@
 										data-description='<?php echo base64_encode($row->description); ?>' 
 										title="Add this item" 
 										class="open-AddBookDialog btn btn-primary btn-xs" 
-										href="#art-update"><?php echo $row->article_id; ?>
+										href="#art-update"><?php echo "K-".$row->article_id; ?>
 								     </a> 
 								</td>
 								<td> <?php echo $row->date; ?> </td>

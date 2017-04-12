@@ -21,7 +21,7 @@ class Login extends CI_Controller {
         public function register()
         {
         	$data['states'] = $this->home_model->get();
-        	$data['title'] = "Registration";
+        	$data['title'] = "User Registration";
             $this->load->view('user/inc/header_view',$data);
 			$this->load->view('user/register_view',$data);
 			$this->load->view('user/inc/footer_view');

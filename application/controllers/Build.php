@@ -27,7 +27,7 @@ class Build extends CI_Controller {
 	//-------------------------------------------------------------------------------------------
 	public function add_build()
 	{
-		$data['title'] = "Add Build Details";
+		$data['title'] = "Register Build";
 		$this->load->view('inc/header_view',$data);
 		$this->load->view('build/build_add_view');
 		$this->load->view('inc/footer_view');
@@ -40,7 +40,7 @@ class Build extends CI_Controller {
 	public function search_build()
 	{
 		$data['builds'] = $this->build_model->get_builds();
-		$data['title'] = "Build/Deployment";
+		$data['title'] = "View or Edit Build";
 		$this->load->view('inc/header_view',$data);
 		$this->load->view('build/build_search_view',$data);
 		$this->load->view('inc/footer_view');

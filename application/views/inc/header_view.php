@@ -23,6 +23,7 @@
     		<link rel="stylesheet" href="<?=base_url()?>public/css/jquery-jvectormap-1.2.2.css">
         	<link rel="stylesheet" href="<?=base_url()?>public/boot/datepicker/datepicker3.css">
         	<link rel="stylesheet" href="<?=base_url()?>public/boot/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+        	<link rel="stylesheet" href="<?=base_url()?>public/hc/css/highcharts.css">
         	<link rel="stylesheet" href="<?=base_url()?>public/css/style.css">
         	
         	
@@ -53,6 +54,9 @@
     		<script src="<?=base_url()?>public/boot/iCheck/icheck.min.js"></script>
     		<script src="<?=base_url()?>public/boot/fastclick/fastclick.min.js"></script>
     		<script src="<?=base_url()?>public/boot/ckeditor/ckeditor.js"></script>
+    		<script src="<?=base_url()?>public/hc/highcharts.js"></script>
+    		<script src="<?=base_url()?>public/hc/modules/data.js"></script>
+    		<script src="<?=base_url()?>public/hc/modules/exporting.js"></script>
     		<script src="<?=base_url()?>public/boot/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
     		<script src="<?=base_url()?>public/boot/dist/js/app.min.js"></script>
     		<script src="<?=base_url()?>public/boot/dist/js/demo.js"></script>

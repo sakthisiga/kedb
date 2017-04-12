@@ -89,7 +89,7 @@
 										data-reason='<?php echo $row->reason; ?>'
 										title="View and Edit" 
 										class="open-AddBookDialog btn btn-primary btn-xs" 
-										href="#deploy-update"><?php echo $row->deploy_id; ?>
+										href="#deploy-update"><?php echo "D-".$row->deploy_id; ?>
 								     </a> 
 								<td> <?php echo $row->date; ?> </td>
 								<td> <?php echo $row->name; ?> </td>
