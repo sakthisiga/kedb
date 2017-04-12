@@ -357,11 +357,6 @@
                      "targets": [ 13 ],
                      "visible": false,
                      "searchable": false
-                 },
-                 {
-                     "targets": [ 16 ],
-                     "visible": false,
-                     "searchable": false
                  }
                  ],
                  "buttons": [

@@ -3,7 +3,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.1.0
         </div>
-        <strong>NYMMIS Devops Initiative.</strong> All rights reserved.
+        <strong>NYMMIS Devops Initiative.</strong> All rights reserved. <small>( Best viewed at 90% zoom in browser )</small>
       </footer>
 
      

@@ -631,9 +631,9 @@ class Api extends CI_Controller {
     	{
     		if($emapData[0] != "")
     		{
-    			if($emapData[9] == "")
+    			if($emapData[6] == "Full" || $emapData[11] == "Build" || $emapData[11] == "Package")
     			{
-    				$to_date=null;
+    				$to_date=NULL;
     			}
     			else
     			{
