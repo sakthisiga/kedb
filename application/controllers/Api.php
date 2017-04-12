@@ -795,8 +795,16 @@ class Api extends CI_Controller {
     	$this->form_validation->set_rules('bd','Build','required');
     	$this->form_validation->set_rules('sdate','From Date','required');
     	$this->form_validation->set_rules('ebdate','Build Date','required');
-    	if($this->input->post('bd') == "Patch" | $this->input->post('bd') == "" )
-    	{ $this->form_validation->set_rules('edate','To Date','required'); }
+    	if($this->input->post('reason') !== "Build")
+    	{ 
+    		if($this->input->post('reason') !== "Package") 
+    		{ 
+    			if($this->input->post('bd') !== "Full")
+    			{
+    			 $this->form_validation->set_rules('edate','To Date','required'); 
+    			}
+    		}
+    	}
     	$this->form_validation->set_rules('status','Status','required');
     	$this->form_validation->set_rules('reason','Reason','required');
     
@@ -809,7 +817,7 @@ class Api extends CI_Controller {
     		return false;
     	}
     	
-    	if($this->input->post('bd') == "Full")
+    	if($this->input->post('bd') == "Full" || $this->input->post('reason') == "Build" || $this->input->post('reason') == "Package")
     	{
     		$enddate=NULL;
     	}
