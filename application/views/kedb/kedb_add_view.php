@@ -13,12 +13,11 @@
         <section class="content">
 
 <!-- New Article Form -->
-          <div class="box box-success">
-            <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>				
+          <div class="box box-default">			
             <div class="box-body">			
               <div class="row">
               <form id="create_article" class="form-entry" method="post" action="<?=site_url('api/create_article')?>">
-                <div class="col-md-6">
+                <div class="col-md-4">
                 
 <!--  Date Field -->
                   <div class="form-group">
@@ -66,7 +65,7 @@
                 </div><!-- /.col -->    
                 
                 
-                <div class="col-md-6">	 
+                <div class="col-md-4">	 
 <!--  State Field -->
                   <div class="form-group">
                     <label>State:</label>
@@ -116,6 +115,9 @@
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->
+                <div class="col-md-4">	
+                     <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>
+                </div>
                 </form>
               </div><!-- /.row -->         
             </div><!-- /.box-body -->    	

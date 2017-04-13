@@ -11,7 +11,7 @@
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
-              <div class="box box-warning">
+              <div class="box box-default">
                 <div class="box-body">
                 <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#search"><b>Custom Search</b></button><p></p>
                   <div class="container col-xs-12">

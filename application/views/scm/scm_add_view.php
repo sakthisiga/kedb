@@ -13,8 +13,7 @@
         <section class="content">
 
 <!-- New Article Form -->
-          <div class="box box-warning">
-            <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>				
+          <div class="box box-default">
             <div class="box-body">			
               <div class="row">
               <form id="add_scm_support" class="form-entry" method="post" action="<?=site_url('api/add_scm_support')?>">
@@ -88,7 +87,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" id="from_date" name="from_date" class="form-control" value="">
+                      <input type="text" id="from_date" name="from_date" class="form-control" value="" onblur='date_change(this.value)'>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->
 
@@ -136,6 +135,9 @@
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->                                                           
                 </div><!-- /.col -->
+                <div class="col-md-4">	
+                     <div id="notify"><!-- Error/Success/Warning Notifications go here.. --></div>
+                </div>
                 </form>
               </div><!-- /.row -->         
             </div><!-- /.box-body -->    	
@@ -146,6 +148,11 @@
       </div><!-- /.content-wrapper -->
       
       <script>
+      function date_change(val)
+      {
+        	 document.getElementById('to_date').value=val;
+      }
+          
       $(function () {
         //Initialize Select2 Elements
         $(".select2").select2({

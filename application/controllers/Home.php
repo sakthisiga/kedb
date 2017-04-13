@@ -55,6 +55,7 @@ class Home extends CI_Controller {
 			$data['profile'] = $this->user_model->session_data($this->session->userdata('user_id'));
 			$data['a_count'] = $this->kedb_model->get_articles_count($this->session->userdata('user_id'));
 			$data['build_count'] = $this->build_model->get_build_count($this->session->userdata('user_id'));
+			$data['deploy_count'] = $this->deploy_model->get_deploy_count($this->session->userdata('user_id'));
 			$data['scm_count'] = $this->scm_model->get_scm_count($this->session->userdata('user_id'));
 			$data['states'] = $this->home_model->get();
 			$data['title'] = "User Profile";

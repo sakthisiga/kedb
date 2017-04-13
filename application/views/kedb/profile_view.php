@@ -43,6 +43,9 @@
                       <b>Builds Completed</b> <a class="pull-right"><span class="badge badge-error"><?php echo $build_count; ?></span></a>
                     </li>
                     <li class="list-group-item">
+                      <b>Deployments Completed</b> <a class="pull-right"><span class="badge badge-info"><?php echo $deploy_count; ?></span></a>
+                    </li>
+                    <li class="list-group-item">
                       <b>SCM Activities Completed</b> <a class="pull-right"><span class="badge badge-inverse"><?php echo $scm_count; ?></span></a>
                     </li>
                   </ul>
